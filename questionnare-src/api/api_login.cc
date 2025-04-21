@@ -117,12 +117,14 @@ int verifyUserPassword(string &user_name,string &pwd){
     return ret;
 }
 
+std::string removeSpecialChar(const std::string& str);
+
 // 与kvstore交互的RSET函数（严格校验命令格式，避免参数解析错误）
 static int setTokenInKvstore(const std::string& key, int expire_time, const std::string& value) {
-    // 1. 严格按协议格式生成命令（RSET key value），确保参数用空格正确分隔
+    // 1. 严格按协议格式生成命令（RSET#key#value#），确保参数用 # 正确分隔
     char command[1024];
     // 2. 检查命令长度，防止缓冲区溢出
-    int command_length = snprintf(command, sizeof(command), "RSET %s %s\n", key.c_str(), value.c_str());
+    int command_length = snprintf(command, sizeof(command), "RSET#%s%s\n", key.c_str(), value.c_str());
     if (command_length < 0 || command_length >= sizeof(command)) {
         LogError("【setTokenInKvstore】命令缓冲区溢出！Key: %s, Value: %s", key.c_str(), value.c_str());
         return -1;
@@ -132,20 +134,22 @@ static int setTokenInKvstore(const std::string& key, int expire_time, const std:
     int ret = send_kvstore_command(command, response, sizeof(response));
 
     // 3. 处理响应中的换行符，确保正确解析返回值
-    if (response[0] != '\0') {
-        char* newline_pos = strchr(response, '\n');
-        if (newline_pos) *newline_pos = '\0'; // 移除换行符，避免影响字符串匹配
-    }
+    // if (response[0] != '\0') {
+    //     char* newline_pos = strchr(response, '\n');
+    //     if (newline_pos) *newline_pos = '\0'; // 移除换行符，避免影响字符串匹配
+    // }
+
+    std::string trimmedResponse = removeSpecialChar(std::string(response));
 
     // 4. 添加调试日志，打印关键参数和响应内容
-    LogError("【setTokenInKvstore】发送命令: %s，响应: %s", command, response);
+    LogError("【setTokenInKvstore】发送命令: %s，响应: %s", command, trimmedResponse.c_str());
 
     // 5. 校验响应是否符合预期（例如包含"OK"）
-    if (ret == 0 && strstr(response, "OK") != nullptr) {
+    if (ret == 0 && trimmedResponse == "OK\r\n") {
         return 0;
     } else {
         LogError("【setTokenInKvstore】操作失败！Key: %s, Value: %s，错误响应: %s", 
-                 key.c_str(), value.c_str(), response);
+                 key.c_str(), value.c_str(), trimmedResponse.c_str());
         return -1;
     }
 }
@@ -162,11 +166,22 @@ static int setTokenInKvstore(const std::string& key, int expire_time, const std:
  *      失败：-1
  */
 /* -------------------------------------------*/
-int setToken(string &user_name, string &token) {
+extern char SPECIAL_CHAR = '#';
+
+// 为字符串添加特殊字符
+extern std::string addSpecialChar(const std::string& str);
+
+// 去除字符串末尾的特殊字符
+extern std::string removeSpecialChar(const std::string& str);
+
+int setToken(std::string &user_name, std::string &token) {
     int ret = 0;
     token = RandomString(32); // 随机32个字母
 
-    if (setTokenInKvstore(user_name, 86400, token) != 0) {
+    std::string keyWithSpecial = addSpecialChar(user_name);
+    std::string valueWithSpecial = addSpecialChar(token);
+
+    if (setTokenInKvstore(keyWithSpecial, 86400, valueWithSpecial) != 0) {
         ret = -1;
     }
 

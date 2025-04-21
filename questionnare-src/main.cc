@@ -71,27 +71,73 @@ std::string removeTrailingNewline(const std::string& str) {
 }
 
 // 与kvstore交互的函数
+// int send_kvstore_command(const char* command, char* response, size_t response_size) {
+//     std::cout << command << std::endl;
+
+//     if (kvstore_sockfd == -1) {
+//         LogError("Not connected to kvstore");
+//         return -1;
+//     }
+
+//     //command_str = removeTrailingNewline(command_str);
+//     // 确保命令以换行符结尾
+//     std::string command_str = command;
+//     if (command_str.back() != '\n') {
+//         command_str += '\n';
+//     }
+
+//     // 发送命令
+//     ssize_t send_len = send(kvstore_sockfd, command_str.c_str(), command_str.length(), 0);
+//     if (send_len < 0) {
+//         LogError("Failed to send command");
+//         perror("send"); // 输出详细的错误信息
+//         return -1;
+//     } else if (send_len != static_cast<ssize_t>(command_str.length())) {
+//         LogError("Partial command sent");
+//         return -1;
+//     }
+
+//     // 接收响应
+//     ssize_t recv_len = recv(kvstore_sockfd, response, response_size - 1, 0);
+//     if (recv_len < 0) {
+//         LogError("Failed to receive response");
+//         perror("recv"); // 输出详细的错误信息
+//         return -1;
+//     } else if (recv_len == 0) {
+//         LogError("Connection closed by peer");
+//         return -1;
+//     }
+//     response[recv_len] = '\0';
+
+//     std::cout << response << std::endl;
+
+//     return 0;
+// }
+// 与kvstore交互的函数
 int send_kvstore_command(const char* command, char* response, size_t response_size) {
-    std::cout << command << std::endl;
+    std::cout << "Sending command: " << command << std::endl;
 
     if (kvstore_sockfd == -1) {
         LogError("Not connected to kvstore");
         return -1;
     }
 
-    // 去除请求字符串末尾的换行符
+    // 确保命令以换行符结尾
     std::string command_str = command;
-    command_str = removeTrailingNewline(command_str);
+    if (command_str.back() != '\n') {
+        command_str += '\n';
+    }
 
     // 发送命令
-    ssize_t send_len = send(kvstore_sockfd, command_str.c_str(), command_str.length(), 0);
-    if (send_len < 0) {
-        LogError("Failed to send command");
-        perror("send"); // 输出详细的错误信息
-        return -1;
-    } else if (send_len != static_cast<ssize_t>(command_str.length())) {
-        LogError("Partial command sent");
-        return -1;
+    ssize_t total_sent = 0;
+    while (total_sent < static_cast<ssize_t>(command_str.length())) {
+        ssize_t sent = send(kvstore_sockfd, command_str.c_str() + total_sent, command_str.length() - total_sent, 0);
+        if (sent < 0) {
+            LogError("Failed to send command");
+            perror("send");
+            return -1;
+        }
+        total_sent += sent;
     }
 
     // 接收响应
@@ -106,7 +152,7 @@ int send_kvstore_command(const char* command, char* response, size_t response_si
     }
     response[recv_len] = '\0';
 
-    std::cout << response << std::endl;
+    std::cout << "Received response: " << response << std::endl;
 
     return 0;
 }
@@ -149,6 +195,21 @@ int initHttpConn(uint32_t thread_num) {
     return 0;
 }
 
+const char SPECIAL_CHAR = '#';
+
+// 为字符串添加特殊字符
+std::string addSpecialChar(const std::string& str) {
+    return str + SPECIAL_CHAR;
+}
+
+// 去除字符串末尾的特殊字符
+std::string removeSpecialChar(const std::string& str) {
+    if (!str.empty() && str.back() == SPECIAL_CHAR) {
+        return str.substr(0, str.length() - 1);
+    }
+    return str;
+}
+
 //mysql存储的部分信息加载kvstore缓存
 int ApiInit() {
     if (!connect_to_kvstore()) {
@@ -157,7 +218,7 @@ int ApiInit() {
     }
 
     CDBManager *db_manager = CDBManager::getInstance();
-    CDBConn *db_conn = db_manager->GetDBConn("qs_slave");  //从数据库管理器获取一个名为 "tuchuang_slave" 的数据库连接对象。这个连接对象用于执行数据库操作
+    CDBConn *db_conn = db_manager->GetDBConn("qs_slave");
     AUTO_REL_DBCONN(db_manager, db_conn);
 
     int ret = 0;
@@ -184,29 +245,36 @@ int ApiInit() {
     return 0;
 }
 
+
 int CacheSetCount( std::string key, int64_t count) {
     char command[1024];
-    // 确保命令格式正确
-    int command_length = snprintf(command, sizeof(command), "RSET %s %lld\n", key.c_str(), count);
+    std::string keyWithSpecial = addSpecialChar(key);
+    std::string valueStr = std::to_string(count);
+    std::string valueWithSpecial = addSpecialChar(valueStr);
+    // 确保命令格式正确，使用 # 作为分隔符
+    int command_length = snprintf(command, sizeof(command), "RSET#%s%s\n", keyWithSpecial.c_str(), valueWithSpecial.c_str());
     if (command_length < 0 || command_length >= sizeof(command)) {
         LogError("Command buffer overflow in CacheSetCount");
         return -1;
     }
     char response[1024];
     int ret = send_kvstore_command(command, response, sizeof(response));
-    if (ret == 0 && strstr(response, "OK") != nullptr) {
-        return 0;
-    } else {
-        LogError("Failed to set count in CacheSetCount. Response: %s", response);
-        return -1;
+    if (ret == 0) {
+        std::string trimmedResponse = removeSpecialChar(std::string(response));
+        if (trimmedResponse == "OK\r\n") {
+            return 0;
+        }
     }
+    LogError("Failed to set count in CacheSetCount. Response: %s", response);
+    return -1;
 }
 
 int CacheGetCount( std::string key, int64_t &count) {
     count = 0;
     char command[1024];
-    // 确保命令格式正确
-    int command_length = snprintf(command, sizeof(command), "RGET %s\n", key.c_str());
+    std::string keyWithSpecial = addSpecialChar(key);
+    // 确保命令格式正确，使用 # 作为分隔符
+    int command_length = snprintf(command, sizeof(command), "RGET#%s\n", keyWithSpecial.c_str());
     if (command_length < 0 || command_length >= sizeof(command)) {
         LogError("Command buffer overflow in CacheGetCount");
         return -1;
@@ -214,12 +282,11 @@ int CacheGetCount( std::string key, int64_t &count) {
     char response[1024];
     int ret = send_kvstore_command(command, response, sizeof(response));
     if (ret == 0 && response[0] != '\0') {
-        // 去除响应中的换行符
-        char* newline = strchr(response, '\n');
-        if (newline) {
-            *newline = '\0';
+        std::string trimmedResponse = removeSpecialChar(std::string(response));
+        if (trimmedResponse == "NO EXIST") {
+            return -1;
         }
-        count = atoll(response);
+        count = std::stoll(trimmedResponse);
         return 0;
     } else {
         LogError("Failed to get count in CacheGetCount. Response: %s", response);
@@ -231,8 +298,9 @@ int CacheGetCount( std::string key, int64_t &count) {
 int CacheIncrCount( std::string key) {
     // 先使用 GET 命令获取当前值
     char get_command[1024];
-    // 确保命令格式正确
-    int get_command_length = snprintf(get_command, sizeof(get_command), "RGET %s\n", key.c_str());
+    std::string keyWithSpecial = addSpecialChar(key);
+    // 确保命令格式正确，使用 # 作为分隔符
+    int get_command_length = snprintf(get_command, sizeof(get_command), "RGET#%s\n", keyWithSpecial.c_str());
     if (get_command_length < 0 || get_command_length >= sizeof(get_command)) {
         LogError("Command buffer overflow in CacheIncrCount (GET)");
         return -1;
@@ -247,12 +315,12 @@ int CacheIncrCount( std::string key) {
     // 将获取到的字符串转换为整数
     int64_t count = 0;
     if (get_response[0] != '\0') {
-        // 去除响应中的换行符
-        char* newline = strchr(get_response, '\n');
-        if (newline) {
-            *newline = '\0';
+        std::string trimmedResponse = removeSpecialChar(std::string(get_response));
+        if (trimmedResponse == "NO EXIST") {
+            count = 0;
+        } else {
+            count = std::stoll(trimmedResponse);
         }
-        count = atoll(get_response);
     }
 
     // 对值进行加一操作
@@ -260,8 +328,10 @@ int CacheIncrCount( std::string key) {
 
     // 使用 SET 命令将新值存回
     char set_command[1024];
-    // 确保命令格式正确
-    int set_command_length = snprintf(set_command, sizeof(set_command), "RSET %s %lld\n", key.c_str(), count);
+    std::string valueStr = std::to_string(count);
+    std::string valueWithSpecial = addSpecialChar(valueStr);
+    // 确保命令格式正确，使用 # 作为分隔符
+    int set_command_length = snprintf(set_command, sizeof(set_command), "RSET#%s%s\n", keyWithSpecial.c_str(), valueWithSpecial.c_str());
     if (set_command_length < 0 || set_command_length >= sizeof(set_command)) {
         LogError("Command buffer overflow in CacheIncrCount (SET)");
         return -1;
@@ -269,20 +339,23 @@ int CacheIncrCount( std::string key) {
     char set_response[1024];
     int set_ret = send_kvstore_command(set_command, set_response, sizeof(set_response));
     if (set_ret == 0) {
-        LogInfo("{}-{}", key, count);
-        return 0;
-    } else {
-        LogError("Failed to set count in CacheIncrCount. Response: %s", set_response);
-        return -1;
+        std::string trimmedResponse = removeSpecialChar(std::string(set_response));
+        if (trimmedResponse == "\r\n") {
+            LogInfo("{}-{}", key, count);
+            return 0;
+        }
     }
+    LogError("Failed to set count in CacheIncrCount. Response: %s", set_response);
+    return -1;
 }
 
 // 键值递减
 int CacheDecrCount( std::string key) {
     // 先使用 GET 命令获取当前值
     char get_command[1024];
-    // 确保命令格式正确
-    int get_command_length = snprintf(get_command, sizeof(get_command), "RGET %s\n", key.c_str());
+    std::string keyWithSpecial = addSpecialChar(key);
+    // 确保命令格式正确，使用 # 作为分隔符
+    int get_command_length = snprintf(get_command, sizeof(get_command), "RGET#%s\n", keyWithSpecial.c_str());
     if (get_command_length < 0 || get_command_length >= sizeof(get_command)) {
         LogError("Command buffer overflow in CacheDecrCount (GET)");
         return -1;
@@ -297,12 +370,12 @@ int CacheDecrCount( std::string key) {
     // 将获取到的字符串转换为整数
     int64_t count = 0;
     if (get_response[0] != '\0') {
-        // 去除响应中的换行符
-        char* newline = strchr(get_response, '\n');
-        if (newline) {
-            *newline = '\0';
+        std::string trimmedResponse = removeSpecialChar(std::string(get_response));
+        if (trimmedResponse == "NO EXIST") {
+            count = 0;
+        } else {
+            count = std::stoll(trimmedResponse);
         }
-        count = atoll(get_response);
     }
 
     // 对值进行减一操作
@@ -316,8 +389,10 @@ int CacheDecrCount( std::string key) {
 
     // 使用 SET 命令将新值存回
     char set_command[1024];
-    // 确保命令格式正确
-    int set_command_length = snprintf(set_command, sizeof(set_command), "RSET %s %lld\n", key.c_str(), count);
+    std::string valueStr = std::to_string(count);
+    std::string valueWithSpecial = addSpecialChar(valueStr);
+    // 确保命令格式正确，使用 # 作为分隔符
+    int set_command_length = snprintf(set_command, sizeof(set_command), "RSET#%s%s\n", keyWithSpecial.c_str(), valueWithSpecial.c_str());
     if (set_command_length < 0 || set_command_length >= sizeof(set_command)) {
         LogError("Command buffer overflow in CacheDecrCount (SET)");
         return -1;
@@ -325,23 +400,30 @@ int CacheDecrCount( std::string key) {
     char set_response[1024];
     int set_ret = send_kvstore_command(set_command, set_response, sizeof(set_response));
     if (set_ret == 0) {
-        LogInfo("{}-{}", key, count);
-        return 0;
-    } else {
-        LogError("Failed to set count in CacheDecrCount. Response: %s", set_response);
-        return -1;
+        std::string trimmedResponse = removeSpecialChar(std::string(set_response));
+        if (trimmedResponse == "\r\n") {
+            LogInfo("{}-{}", key, count);
+            return 0;
+        }
     }
+    LogError("Failed to set count in CacheDecrCount. Response: %s", set_response);
+    return -1;
 }
 
 // 与kvstore交互的Get函数
 std::string GetFromKvstore(const std::string& key) {
     char command[1024];
-    snprintf(command, sizeof(command), "RGET %s\n", key.c_str());
+    std::string keyWithSpecial = addSpecialChar(key);
+    // 确保命令格式正确，使用 # 作为分隔符
+    snprintf(command, sizeof(command), "RGET#%s\n", keyWithSpecial.c_str());
     char response[1024];
     int ret = send_kvstore_command(command, response, sizeof(response));
     if (ret == 0 && response[0] != '\0') {
-        printf("%s\n",response);
-        return std::string(response);
+        std::string trimmedResponse = removeSpecialChar(std::string(response));
+        if (trimmedResponse == "NO EXIST") {
+            return "";
+        }
+        return trimmedResponse;
     }
     return "";
 }
