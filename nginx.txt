@@ -5,6 +5,7 @@ root@k8s-master1:/etc/nginx/conf.d#
 nginx  -t
 nginx  -s reload
 
-####使用系统命令
+nginx
+
 
 

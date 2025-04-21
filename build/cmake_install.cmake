@@ -1,4 +1,4 @@
-# Install script for directory: /home/jerry/Desktop/questionnare/questionnare-src/test/mysql_test
+# Install script for directory: /home/jerry/Desktop/questionnare/questionnare-src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

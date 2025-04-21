@@ -1,4 +1,3 @@
---source /home/jerry/Desktop/questionnare/sql/questionnare.sql
 CREATE DATABASE IF NOT EXISTS survey_system;
 
 USE survey_system;

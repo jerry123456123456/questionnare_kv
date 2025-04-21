@@ -57,7 +57,7 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/jerry/Desktop/questionnare/questionnare-src/test/mysql_test
+CMAKE_SOURCE_DIR = /home/jerry/Desktop/questionnare/questionnare-src
 
 # The top-level build directory on which CMake was run.
 CMAKE_BINARY_DIR = /home/jerry/Desktop/questionnare/build
@@ -117,353 +117,713 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named mysql_test
+# Target rules for targets named qs_http_server
 
 # Build rule for target.
-mysql_test: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mysql_test
-.PHONY : mysql_test
+qs_http_server: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 qs_http_server
+.PHONY : qs_http_server
 
 # fast build rule for target.
-mysql_test/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mysql_test.dir/build.make CMakeFiles/mysql_test.dir/build
-.PHONY : mysql_test/fast
+qs_http_server/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/build
+.PHONY : qs_http_server/fast
 
-home/jerry/Desktop/questionnare/questionnare-src/base/base_socket.o: home/jerry/Desktop/questionnare/questionnare-src/base/base_socket.cpp.o
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/base_socket.o
-
-# target to build an object file
-home/jerry/Desktop/questionnare/questionnare-src/base/base_socket.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mysql_test.dir/build.make CMakeFiles/mysql_test.dir/home/jerry/Desktop/questionnare/questionnare-src/base/base_socket.cpp.o
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/base_socket.cpp.o
-
-home/jerry/Desktop/questionnare/questionnare-src/base/base_socket.i: home/jerry/Desktop/questionnare/questionnare-src/base/base_socket.cpp.i
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/base_socket.i
-
-# target to preprocess a source file
-home/jerry/Desktop/questionnare/questionnare-src/base/base_socket.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mysql_test.dir/build.make CMakeFiles/mysql_test.dir/home/jerry/Desktop/questionnare/questionnare-src/base/base_socket.cpp.i
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/base_socket.cpp.i
-
-home/jerry/Desktop/questionnare/questionnare-src/base/base_socket.s: home/jerry/Desktop/questionnare/questionnare-src/base/base_socket.cpp.s
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/base_socket.s
-
-# target to generate assembly for a file
-home/jerry/Desktop/questionnare/questionnare-src/base/base_socket.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mysql_test.dir/build.make CMakeFiles/mysql_test.dir/home/jerry/Desktop/questionnare/questionnare-src/base/base_socket.cpp.s
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/base_socket.cpp.s
-
-home/jerry/Desktop/questionnare/questionnare-src/base/config_file_reader.o: home/jerry/Desktop/questionnare/questionnare-src/base/config_file_reader.cpp.o
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/config_file_reader.o
+api/api_common.o: api/api_common.cc.o
+.PHONY : api/api_common.o
 
 # target to build an object file
-home/jerry/Desktop/questionnare/questionnare-src/base/config_file_reader.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mysql_test.dir/build.make CMakeFiles/mysql_test.dir/home/jerry/Desktop/questionnare/questionnare-src/base/config_file_reader.cpp.o
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/config_file_reader.cpp.o
+api/api_common.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/api/api_common.cc.o
+.PHONY : api/api_common.cc.o
 
-home/jerry/Desktop/questionnare/questionnare-src/base/config_file_reader.i: home/jerry/Desktop/questionnare/questionnare-src/base/config_file_reader.cpp.i
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/config_file_reader.i
+api/api_common.i: api/api_common.cc.i
+.PHONY : api/api_common.i
 
 # target to preprocess a source file
-home/jerry/Desktop/questionnare/questionnare-src/base/config_file_reader.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mysql_test.dir/build.make CMakeFiles/mysql_test.dir/home/jerry/Desktop/questionnare/questionnare-src/base/config_file_reader.cpp.i
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/config_file_reader.cpp.i
+api/api_common.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/api/api_common.cc.i
+.PHONY : api/api_common.cc.i
 
-home/jerry/Desktop/questionnare/questionnare-src/base/config_file_reader.s: home/jerry/Desktop/questionnare/questionnare-src/base/config_file_reader.cpp.s
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/config_file_reader.s
+api/api_common.s: api/api_common.cc.s
+.PHONY : api/api_common.s
 
 # target to generate assembly for a file
-home/jerry/Desktop/questionnare/questionnare-src/base/config_file_reader.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mysql_test.dir/build.make CMakeFiles/mysql_test.dir/home/jerry/Desktop/questionnare/questionnare-src/base/config_file_reader.cpp.s
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/config_file_reader.cpp.s
+api/api_common.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/api/api_common.cc.s
+.PHONY : api/api_common.cc.s
 
-home/jerry/Desktop/questionnare/questionnare-src/base/dlog.o: home/jerry/Desktop/questionnare/questionnare-src/base/dlog.cpp.o
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/dlog.o
+api/api_deal_table.o: api/api_deal_table.cc.o
+.PHONY : api/api_deal_table.o
 
 # target to build an object file
-home/jerry/Desktop/questionnare/questionnare-src/base/dlog.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mysql_test.dir/build.make CMakeFiles/mysql_test.dir/home/jerry/Desktop/questionnare/questionnare-src/base/dlog.cpp.o
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/dlog.cpp.o
+api/api_deal_table.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/api/api_deal_table.cc.o
+.PHONY : api/api_deal_table.cc.o
 
-home/jerry/Desktop/questionnare/questionnare-src/base/dlog.i: home/jerry/Desktop/questionnare/questionnare-src/base/dlog.cpp.i
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/dlog.i
+api/api_deal_table.i: api/api_deal_table.cc.i
+.PHONY : api/api_deal_table.i
 
 # target to preprocess a source file
-home/jerry/Desktop/questionnare/questionnare-src/base/dlog.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mysql_test.dir/build.make CMakeFiles/mysql_test.dir/home/jerry/Desktop/questionnare/questionnare-src/base/dlog.cpp.i
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/dlog.cpp.i
+api/api_deal_table.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/api/api_deal_table.cc.i
+.PHONY : api/api_deal_table.cc.i
 
-home/jerry/Desktop/questionnare/questionnare-src/base/dlog.s: home/jerry/Desktop/questionnare/questionnare-src/base/dlog.cpp.s
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/dlog.s
+api/api_deal_table.s: api/api_deal_table.cc.s
+.PHONY : api/api_deal_table.s
 
 # target to generate assembly for a file
-home/jerry/Desktop/questionnare/questionnare-src/base/dlog.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mysql_test.dir/build.make CMakeFiles/mysql_test.dir/home/jerry/Desktop/questionnare/questionnare-src/base/dlog.cpp.s
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/dlog.cpp.s
+api/api_deal_table.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/api/api_deal_table.cc.s
+.PHONY : api/api_deal_table.cc.s
 
-home/jerry/Desktop/questionnare/questionnare-src/base/event_dispatch.o: home/jerry/Desktop/questionnare/questionnare-src/base/event_dispatch.cpp.o
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/event_dispatch.o
+api/api_login.o: api/api_login.cc.o
+.PHONY : api/api_login.o
 
 # target to build an object file
-home/jerry/Desktop/questionnare/questionnare-src/base/event_dispatch.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mysql_test.dir/build.make CMakeFiles/mysql_test.dir/home/jerry/Desktop/questionnare/questionnare-src/base/event_dispatch.cpp.o
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/event_dispatch.cpp.o
+api/api_login.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/api/api_login.cc.o
+.PHONY : api/api_login.cc.o
 
-home/jerry/Desktop/questionnare/questionnare-src/base/event_dispatch.i: home/jerry/Desktop/questionnare/questionnare-src/base/event_dispatch.cpp.i
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/event_dispatch.i
+api/api_login.i: api/api_login.cc.i
+.PHONY : api/api_login.i
 
 # target to preprocess a source file
-home/jerry/Desktop/questionnare/questionnare-src/base/event_dispatch.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mysql_test.dir/build.make CMakeFiles/mysql_test.dir/home/jerry/Desktop/questionnare/questionnare-src/base/event_dispatch.cpp.i
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/event_dispatch.cpp.i
+api/api_login.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/api/api_login.cc.i
+.PHONY : api/api_login.cc.i
 
-home/jerry/Desktop/questionnare/questionnare-src/base/event_dispatch.s: home/jerry/Desktop/questionnare/questionnare-src/base/event_dispatch.cpp.s
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/event_dispatch.s
+api/api_login.s: api/api_login.cc.s
+.PHONY : api/api_login.s
 
 # target to generate assembly for a file
-home/jerry/Desktop/questionnare/questionnare-src/base/event_dispatch.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mysql_test.dir/build.make CMakeFiles/mysql_test.dir/home/jerry/Desktop/questionnare/questionnare-src/base/event_dispatch.cpp.s
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/event_dispatch.cpp.s
+api/api_login.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/api/api_login.cc.s
+.PHONY : api/api_login.cc.s
 
-home/jerry/Desktop/questionnare/questionnare-src/base/http_parser.o: home/jerry/Desktop/questionnare/questionnare-src/base/http_parser.cc.o
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/http_parser.o
+api/api_mytables.o: api/api_mytables.cc.o
+.PHONY : api/api_mytables.o
 
 # target to build an object file
-home/jerry/Desktop/questionnare/questionnare-src/base/http_parser.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mysql_test.dir/build.make CMakeFiles/mysql_test.dir/home/jerry/Desktop/questionnare/questionnare-src/base/http_parser.cc.o
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/http_parser.cc.o
+api/api_mytables.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/api/api_mytables.cc.o
+.PHONY : api/api_mytables.cc.o
 
-home/jerry/Desktop/questionnare/questionnare-src/base/http_parser.i: home/jerry/Desktop/questionnare/questionnare-src/base/http_parser.cc.i
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/http_parser.i
+api/api_mytables.i: api/api_mytables.cc.i
+.PHONY : api/api_mytables.i
 
 # target to preprocess a source file
-home/jerry/Desktop/questionnare/questionnare-src/base/http_parser.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mysql_test.dir/build.make CMakeFiles/mysql_test.dir/home/jerry/Desktop/questionnare/questionnare-src/base/http_parser.cc.i
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/http_parser.cc.i
+api/api_mytables.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/api/api_mytables.cc.i
+.PHONY : api/api_mytables.cc.i
 
-home/jerry/Desktop/questionnare/questionnare-src/base/http_parser.s: home/jerry/Desktop/questionnare/questionnare-src/base/http_parser.cc.s
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/http_parser.s
+api/api_mytables.s: api/api_mytables.cc.s
+.PHONY : api/api_mytables.s
 
 # target to generate assembly for a file
-home/jerry/Desktop/questionnare/questionnare-src/base/http_parser.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mysql_test.dir/build.make CMakeFiles/mysql_test.dir/home/jerry/Desktop/questionnare/questionnare-src/base/http_parser.cc.s
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/http_parser.cc.s
+api/api_mytables.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/api/api_mytables.cc.s
+.PHONY : api/api_mytables.cc.s
 
-home/jerry/Desktop/questionnare/questionnare-src/base/http_parser_wrapper.o: home/jerry/Desktop/questionnare/questionnare-src/base/http_parser_wrapper.cpp.o
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/http_parser_wrapper.o
+api/api_register.o: api/api_register.cc.o
+.PHONY : api/api_register.o
 
 # target to build an object file
-home/jerry/Desktop/questionnare/questionnare-src/base/http_parser_wrapper.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mysql_test.dir/build.make CMakeFiles/mysql_test.dir/home/jerry/Desktop/questionnare/questionnare-src/base/http_parser_wrapper.cpp.o
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/http_parser_wrapper.cpp.o
+api/api_register.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/api/api_register.cc.o
+.PHONY : api/api_register.cc.o
 
-home/jerry/Desktop/questionnare/questionnare-src/base/http_parser_wrapper.i: home/jerry/Desktop/questionnare/questionnare-src/base/http_parser_wrapper.cpp.i
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/http_parser_wrapper.i
+api/api_register.i: api/api_register.cc.i
+.PHONY : api/api_register.i
 
 # target to preprocess a source file
-home/jerry/Desktop/questionnare/questionnare-src/base/http_parser_wrapper.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mysql_test.dir/build.make CMakeFiles/mysql_test.dir/home/jerry/Desktop/questionnare/questionnare-src/base/http_parser_wrapper.cpp.i
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/http_parser_wrapper.cpp.i
+api/api_register.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/api/api_register.cc.i
+.PHONY : api/api_register.cc.i
 
-home/jerry/Desktop/questionnare/questionnare-src/base/http_parser_wrapper.s: home/jerry/Desktop/questionnare/questionnare-src/base/http_parser_wrapper.cpp.s
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/http_parser_wrapper.s
+api/api_register.s: api/api_register.cc.s
+.PHONY : api/api_register.s
 
 # target to generate assembly for a file
-home/jerry/Desktop/questionnare/questionnare-src/base/http_parser_wrapper.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mysql_test.dir/build.make CMakeFiles/mysql_test.dir/home/jerry/Desktop/questionnare/questionnare-src/base/http_parser_wrapper.cpp.s
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/http_parser_wrapper.cpp.s
+api/api_register.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/api/api_register.cc.s
+.PHONY : api/api_register.cc.s
 
-home/jerry/Desktop/questionnare/questionnare-src/base/lock.o: home/jerry/Desktop/questionnare/questionnare-src/base/lock.cpp.o
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/lock.o
+api/api_root_create_table.o: api/api_root_create_table.cc.o
+.PHONY : api/api_root_create_table.o
 
 # target to build an object file
-home/jerry/Desktop/questionnare/questionnare-src/base/lock.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mysql_test.dir/build.make CMakeFiles/mysql_test.dir/home/jerry/Desktop/questionnare/questionnare-src/base/lock.cpp.o
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/lock.cpp.o
+api/api_root_create_table.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/api/api_root_create_table.cc.o
+.PHONY : api/api_root_create_table.cc.o
 
-home/jerry/Desktop/questionnare/questionnare-src/base/lock.i: home/jerry/Desktop/questionnare/questionnare-src/base/lock.cpp.i
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/lock.i
+api/api_root_create_table.i: api/api_root_create_table.cc.i
+.PHONY : api/api_root_create_table.i
 
 # target to preprocess a source file
-home/jerry/Desktop/questionnare/questionnare-src/base/lock.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mysql_test.dir/build.make CMakeFiles/mysql_test.dir/home/jerry/Desktop/questionnare/questionnare-src/base/lock.cpp.i
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/lock.cpp.i
+api/api_root_create_table.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/api/api_root_create_table.cc.i
+.PHONY : api/api_root_create_table.cc.i
 
-home/jerry/Desktop/questionnare/questionnare-src/base/lock.s: home/jerry/Desktop/questionnare/questionnare-src/base/lock.cpp.s
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/lock.s
+api/api_root_create_table.s: api/api_root_create_table.cc.s
+.PHONY : api/api_root_create_table.s
 
 # target to generate assembly for a file
-home/jerry/Desktop/questionnare/questionnare-src/base/lock.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mysql_test.dir/build.make CMakeFiles/mysql_test.dir/home/jerry/Desktop/questionnare/questionnare-src/base/lock.cpp.s
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/lock.cpp.s
+api/api_root_create_table.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/api/api_root_create_table.cc.s
+.PHONY : api/api_root_create_table.cc.s
 
-home/jerry/Desktop/questionnare/questionnare-src/base/netlib.o: home/jerry/Desktop/questionnare/questionnare-src/base/netlib.cpp.o
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/netlib.o
+api/api_root_delete_table.o: api/api_root_delete_table.cc.o
+.PHONY : api/api_root_delete_table.o
 
 # target to build an object file
-home/jerry/Desktop/questionnare/questionnare-src/base/netlib.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mysql_test.dir/build.make CMakeFiles/mysql_test.dir/home/jerry/Desktop/questionnare/questionnare-src/base/netlib.cpp.o
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/netlib.cpp.o
+api/api_root_delete_table.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/api/api_root_delete_table.cc.o
+.PHONY : api/api_root_delete_table.cc.o
 
-home/jerry/Desktop/questionnare/questionnare-src/base/netlib.i: home/jerry/Desktop/questionnare/questionnare-src/base/netlib.cpp.i
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/netlib.i
+api/api_root_delete_table.i: api/api_root_delete_table.cc.i
+.PHONY : api/api_root_delete_table.i
 
 # target to preprocess a source file
-home/jerry/Desktop/questionnare/questionnare-src/base/netlib.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mysql_test.dir/build.make CMakeFiles/mysql_test.dir/home/jerry/Desktop/questionnare/questionnare-src/base/netlib.cpp.i
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/netlib.cpp.i
+api/api_root_delete_table.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/api/api_root_delete_table.cc.i
+.PHONY : api/api_root_delete_table.cc.i
 
-home/jerry/Desktop/questionnare/questionnare-src/base/netlib.s: home/jerry/Desktop/questionnare/questionnare-src/base/netlib.cpp.s
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/netlib.s
+api/api_root_delete_table.s: api/api_root_delete_table.cc.s
+.PHONY : api/api_root_delete_table.s
 
 # target to generate assembly for a file
-home/jerry/Desktop/questionnare/questionnare-src/base/netlib.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mysql_test.dir/build.make CMakeFiles/mysql_test.dir/home/jerry/Desktop/questionnare/questionnare-src/base/netlib.cpp.s
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/netlib.cpp.s
+api/api_root_delete_table.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/api/api_root_delete_table.cc.s
+.PHONY : api/api_root_delete_table.cc.s
 
-home/jerry/Desktop/questionnare/questionnare-src/base/tc_common.o: home/jerry/Desktop/questionnare/questionnare-src/base/tc_common.cpp.o
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/tc_common.o
+api/api_root_tables.o: api/api_root_tables.cc.o
+.PHONY : api/api_root_tables.o
 
 # target to build an object file
-home/jerry/Desktop/questionnare/questionnare-src/base/tc_common.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mysql_test.dir/build.make CMakeFiles/mysql_test.dir/home/jerry/Desktop/questionnare/questionnare-src/base/tc_common.cpp.o
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/tc_common.cpp.o
+api/api_root_tables.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/api/api_root_tables.cc.o
+.PHONY : api/api_root_tables.cc.o
 
-home/jerry/Desktop/questionnare/questionnare-src/base/tc_common.i: home/jerry/Desktop/questionnare/questionnare-src/base/tc_common.cpp.i
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/tc_common.i
+api/api_root_tables.i: api/api_root_tables.cc.i
+.PHONY : api/api_root_tables.i
 
 # target to preprocess a source file
-home/jerry/Desktop/questionnare/questionnare-src/base/tc_common.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mysql_test.dir/build.make CMakeFiles/mysql_test.dir/home/jerry/Desktop/questionnare/questionnare-src/base/tc_common.cpp.i
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/tc_common.cpp.i
+api/api_root_tables.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/api/api_root_tables.cc.i
+.PHONY : api/api_root_tables.cc.i
 
-home/jerry/Desktop/questionnare/questionnare-src/base/tc_common.s: home/jerry/Desktop/questionnare/questionnare-src/base/tc_common.cpp.s
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/tc_common.s
+api/api_root_tables.s: api/api_root_tables.cc.s
+.PHONY : api/api_root_tables.s
 
 # target to generate assembly for a file
-home/jerry/Desktop/questionnare/questionnare-src/base/tc_common.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mysql_test.dir/build.make CMakeFiles/mysql_test.dir/home/jerry/Desktop/questionnare/questionnare-src/base/tc_common.cpp.s
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/tc_common.cpp.s
+api/api_root_tables.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/api/api_root_tables.cc.s
+.PHONY : api/api_root_tables.cc.s
 
-home/jerry/Desktop/questionnare/questionnare-src/base/tc_thread_pool.o: home/jerry/Desktop/questionnare/questionnare-src/base/tc_thread_pool.cc.o
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/tc_thread_pool.o
+api/api_unreg.o: api/api_unreg.cc.o
+.PHONY : api/api_unreg.o
 
 # target to build an object file
-home/jerry/Desktop/questionnare/questionnare-src/base/tc_thread_pool.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mysql_test.dir/build.make CMakeFiles/mysql_test.dir/home/jerry/Desktop/questionnare/questionnare-src/base/tc_thread_pool.cc.o
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/tc_thread_pool.cc.o
+api/api_unreg.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/api/api_unreg.cc.o
+.PHONY : api/api_unreg.cc.o
 
-home/jerry/Desktop/questionnare/questionnare-src/base/tc_thread_pool.i: home/jerry/Desktop/questionnare/questionnare-src/base/tc_thread_pool.cc.i
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/tc_thread_pool.i
+api/api_unreg.i: api/api_unreg.cc.i
+.PHONY : api/api_unreg.i
 
 # target to preprocess a source file
-home/jerry/Desktop/questionnare/questionnare-src/base/tc_thread_pool.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mysql_test.dir/build.make CMakeFiles/mysql_test.dir/home/jerry/Desktop/questionnare/questionnare-src/base/tc_thread_pool.cc.i
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/tc_thread_pool.cc.i
+api/api_unreg.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/api/api_unreg.cc.i
+.PHONY : api/api_unreg.cc.i
 
-home/jerry/Desktop/questionnare/questionnare-src/base/tc_thread_pool.s: home/jerry/Desktop/questionnare/questionnare-src/base/tc_thread_pool.cc.s
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/tc_thread_pool.s
+api/api_unreg.s: api/api_unreg.cc.s
+.PHONY : api/api_unreg.s
 
 # target to generate assembly for a file
-home/jerry/Desktop/questionnare/questionnare-src/base/tc_thread_pool.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mysql_test.dir/build.make CMakeFiles/mysql_test.dir/home/jerry/Desktop/questionnare/questionnare-src/base/tc_thread_pool.cc.s
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/tc_thread_pool.cc.s
+api/api_unreg.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/api/api_unreg.cc.s
+.PHONY : api/api_unreg.cc.s
 
-home/jerry/Desktop/questionnare/questionnare-src/base/util.o: home/jerry/Desktop/questionnare/questionnare-src/base/util.cpp.o
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/util.o
+base/base_socket.o: base/base_socket.cpp.o
+.PHONY : base/base_socket.o
 
 # target to build an object file
-home/jerry/Desktop/questionnare/questionnare-src/base/util.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mysql_test.dir/build.make CMakeFiles/mysql_test.dir/home/jerry/Desktop/questionnare/questionnare-src/base/util.cpp.o
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/util.cpp.o
+base/base_socket.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/base/base_socket.cpp.o
+.PHONY : base/base_socket.cpp.o
 
-home/jerry/Desktop/questionnare/questionnare-src/base/util.i: home/jerry/Desktop/questionnare/questionnare-src/base/util.cpp.i
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/util.i
+base/base_socket.i: base/base_socket.cpp.i
+.PHONY : base/base_socket.i
 
 # target to preprocess a source file
-home/jerry/Desktop/questionnare/questionnare-src/base/util.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mysql_test.dir/build.make CMakeFiles/mysql_test.dir/home/jerry/Desktop/questionnare/questionnare-src/base/util.cpp.i
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/util.cpp.i
+base/base_socket.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/base/base_socket.cpp.i
+.PHONY : base/base_socket.cpp.i
 
-home/jerry/Desktop/questionnare/questionnare-src/base/util.s: home/jerry/Desktop/questionnare/questionnare-src/base/util.cpp.s
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/util.s
+base/base_socket.s: base/base_socket.cpp.s
+.PHONY : base/base_socket.s
 
 # target to generate assembly for a file
-home/jerry/Desktop/questionnare/questionnare-src/base/util.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mysql_test.dir/build.make CMakeFiles/mysql_test.dir/home/jerry/Desktop/questionnare/questionnare-src/base/util.cpp.s
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/util.cpp.s
+base/base_socket.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/base/base_socket.cpp.s
+.PHONY : base/base_socket.cpp.s
 
-home/jerry/Desktop/questionnare/questionnare-src/base/util_pdu.o: home/jerry/Desktop/questionnare/questionnare-src/base/util_pdu.cc.o
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/util_pdu.o
+base/config_file_reader.o: base/config_file_reader.cpp.o
+.PHONY : base/config_file_reader.o
 
 # target to build an object file
-home/jerry/Desktop/questionnare/questionnare-src/base/util_pdu.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mysql_test.dir/build.make CMakeFiles/mysql_test.dir/home/jerry/Desktop/questionnare/questionnare-src/base/util_pdu.cc.o
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/util_pdu.cc.o
+base/config_file_reader.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/base/config_file_reader.cpp.o
+.PHONY : base/config_file_reader.cpp.o
 
-home/jerry/Desktop/questionnare/questionnare-src/base/util_pdu.i: home/jerry/Desktop/questionnare/questionnare-src/base/util_pdu.cc.i
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/util_pdu.i
+base/config_file_reader.i: base/config_file_reader.cpp.i
+.PHONY : base/config_file_reader.i
 
 # target to preprocess a source file
-home/jerry/Desktop/questionnare/questionnare-src/base/util_pdu.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mysql_test.dir/build.make CMakeFiles/mysql_test.dir/home/jerry/Desktop/questionnare/questionnare-src/base/util_pdu.cc.i
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/util_pdu.cc.i
+base/config_file_reader.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/base/config_file_reader.cpp.i
+.PHONY : base/config_file_reader.cpp.i
 
-home/jerry/Desktop/questionnare/questionnare-src/base/util_pdu.s: home/jerry/Desktop/questionnare/questionnare-src/base/util_pdu.cc.s
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/util_pdu.s
+base/config_file_reader.s: base/config_file_reader.cpp.s
+.PHONY : base/config_file_reader.s
 
 # target to generate assembly for a file
-home/jerry/Desktop/questionnare/questionnare-src/base/util_pdu.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mysql_test.dir/build.make CMakeFiles/mysql_test.dir/home/jerry/Desktop/questionnare/questionnare-src/base/util_pdu.cc.s
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/base/util_pdu.cc.s
+base/config_file_reader.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/base/config_file_reader.cpp.s
+.PHONY : base/config_file_reader.cpp.s
 
-home/jerry/Desktop/questionnare/questionnare-src/mysql/db_pool.o: home/jerry/Desktop/questionnare/questionnare-src/mysql/db_pool.cc.o
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/mysql/db_pool.o
+base/dlog.o: base/dlog.cpp.o
+.PHONY : base/dlog.o
 
 # target to build an object file
-home/jerry/Desktop/questionnare/questionnare-src/mysql/db_pool.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mysql_test.dir/build.make CMakeFiles/mysql_test.dir/home/jerry/Desktop/questionnare/questionnare-src/mysql/db_pool.cc.o
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/mysql/db_pool.cc.o
+base/dlog.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/base/dlog.cpp.o
+.PHONY : base/dlog.cpp.o
 
-home/jerry/Desktop/questionnare/questionnare-src/mysql/db_pool.i: home/jerry/Desktop/questionnare/questionnare-src/mysql/db_pool.cc.i
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/mysql/db_pool.i
+base/dlog.i: base/dlog.cpp.i
+.PHONY : base/dlog.i
 
 # target to preprocess a source file
-home/jerry/Desktop/questionnare/questionnare-src/mysql/db_pool.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mysql_test.dir/build.make CMakeFiles/mysql_test.dir/home/jerry/Desktop/questionnare/questionnare-src/mysql/db_pool.cc.i
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/mysql/db_pool.cc.i
+base/dlog.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/base/dlog.cpp.i
+.PHONY : base/dlog.cpp.i
 
-home/jerry/Desktop/questionnare/questionnare-src/mysql/db_pool.s: home/jerry/Desktop/questionnare/questionnare-src/mysql/db_pool.cc.s
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/mysql/db_pool.s
+base/dlog.s: base/dlog.cpp.s
+.PHONY : base/dlog.s
 
 # target to generate assembly for a file
-home/jerry/Desktop/questionnare/questionnare-src/mysql/db_pool.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mysql_test.dir/build.make CMakeFiles/mysql_test.dir/home/jerry/Desktop/questionnare/questionnare-src/mysql/db_pool.cc.s
-.PHONY : home/jerry/Desktop/questionnare/questionnare-src/mysql/db_pool.cc.s
+base/dlog.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/base/dlog.cpp.s
+.PHONY : base/dlog.cpp.s
 
-mysql_test.o: mysql_test.cc.o
-.PHONY : mysql_test.o
+base/event_dispatch.o: base/event_dispatch.cpp.o
+.PHONY : base/event_dispatch.o
 
 # target to build an object file
-mysql_test.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mysql_test.dir/build.make CMakeFiles/mysql_test.dir/mysql_test.cc.o
-.PHONY : mysql_test.cc.o
+base/event_dispatch.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/base/event_dispatch.cpp.o
+.PHONY : base/event_dispatch.cpp.o
 
-mysql_test.i: mysql_test.cc.i
-.PHONY : mysql_test.i
+base/event_dispatch.i: base/event_dispatch.cpp.i
+.PHONY : base/event_dispatch.i
 
 # target to preprocess a source file
-mysql_test.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mysql_test.dir/build.make CMakeFiles/mysql_test.dir/mysql_test.cc.i
-.PHONY : mysql_test.cc.i
+base/event_dispatch.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/base/event_dispatch.cpp.i
+.PHONY : base/event_dispatch.cpp.i
 
-mysql_test.s: mysql_test.cc.s
-.PHONY : mysql_test.s
+base/event_dispatch.s: base/event_dispatch.cpp.s
+.PHONY : base/event_dispatch.s
 
 # target to generate assembly for a file
-mysql_test.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mysql_test.dir/build.make CMakeFiles/mysql_test.dir/mysql_test.cc.s
-.PHONY : mysql_test.cc.s
+base/event_dispatch.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/base/event_dispatch.cpp.s
+.PHONY : base/event_dispatch.cpp.s
+
+base/http_parser.o: base/http_parser.cc.o
+.PHONY : base/http_parser.o
+
+# target to build an object file
+base/http_parser.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/base/http_parser.cc.o
+.PHONY : base/http_parser.cc.o
+
+base/http_parser.i: base/http_parser.cc.i
+.PHONY : base/http_parser.i
+
+# target to preprocess a source file
+base/http_parser.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/base/http_parser.cc.i
+.PHONY : base/http_parser.cc.i
+
+base/http_parser.s: base/http_parser.cc.s
+.PHONY : base/http_parser.s
+
+# target to generate assembly for a file
+base/http_parser.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/base/http_parser.cc.s
+.PHONY : base/http_parser.cc.s
+
+base/http_parser_wrapper.o: base/http_parser_wrapper.cpp.o
+.PHONY : base/http_parser_wrapper.o
+
+# target to build an object file
+base/http_parser_wrapper.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/base/http_parser_wrapper.cpp.o
+.PHONY : base/http_parser_wrapper.cpp.o
+
+base/http_parser_wrapper.i: base/http_parser_wrapper.cpp.i
+.PHONY : base/http_parser_wrapper.i
+
+# target to preprocess a source file
+base/http_parser_wrapper.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/base/http_parser_wrapper.cpp.i
+.PHONY : base/http_parser_wrapper.cpp.i
+
+base/http_parser_wrapper.s: base/http_parser_wrapper.cpp.s
+.PHONY : base/http_parser_wrapper.s
+
+# target to generate assembly for a file
+base/http_parser_wrapper.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/base/http_parser_wrapper.cpp.s
+.PHONY : base/http_parser_wrapper.cpp.s
+
+base/lock.o: base/lock.cpp.o
+.PHONY : base/lock.o
+
+# target to build an object file
+base/lock.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/base/lock.cpp.o
+.PHONY : base/lock.cpp.o
+
+base/lock.i: base/lock.cpp.i
+.PHONY : base/lock.i
+
+# target to preprocess a source file
+base/lock.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/base/lock.cpp.i
+.PHONY : base/lock.cpp.i
+
+base/lock.s: base/lock.cpp.s
+.PHONY : base/lock.s
+
+# target to generate assembly for a file
+base/lock.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/base/lock.cpp.s
+.PHONY : base/lock.cpp.s
+
+base/netlib.o: base/netlib.cpp.o
+.PHONY : base/netlib.o
+
+# target to build an object file
+base/netlib.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/base/netlib.cpp.o
+.PHONY : base/netlib.cpp.o
+
+base/netlib.i: base/netlib.cpp.i
+.PHONY : base/netlib.i
+
+# target to preprocess a source file
+base/netlib.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/base/netlib.cpp.i
+.PHONY : base/netlib.cpp.i
+
+base/netlib.s: base/netlib.cpp.s
+.PHONY : base/netlib.s
+
+# target to generate assembly for a file
+base/netlib.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/base/netlib.cpp.s
+.PHONY : base/netlib.cpp.s
+
+base/tc_common.o: base/tc_common.cpp.o
+.PHONY : base/tc_common.o
+
+# target to build an object file
+base/tc_common.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/base/tc_common.cpp.o
+.PHONY : base/tc_common.cpp.o
+
+base/tc_common.i: base/tc_common.cpp.i
+.PHONY : base/tc_common.i
+
+# target to preprocess a source file
+base/tc_common.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/base/tc_common.cpp.i
+.PHONY : base/tc_common.cpp.i
+
+base/tc_common.s: base/tc_common.cpp.s
+.PHONY : base/tc_common.s
+
+# target to generate assembly for a file
+base/tc_common.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/base/tc_common.cpp.s
+.PHONY : base/tc_common.cpp.s
+
+base/tc_thread_pool.o: base/tc_thread_pool.cc.o
+.PHONY : base/tc_thread_pool.o
+
+# target to build an object file
+base/tc_thread_pool.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/base/tc_thread_pool.cc.o
+.PHONY : base/tc_thread_pool.cc.o
+
+base/tc_thread_pool.i: base/tc_thread_pool.cc.i
+.PHONY : base/tc_thread_pool.i
+
+# target to preprocess a source file
+base/tc_thread_pool.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/base/tc_thread_pool.cc.i
+.PHONY : base/tc_thread_pool.cc.i
+
+base/tc_thread_pool.s: base/tc_thread_pool.cc.s
+.PHONY : base/tc_thread_pool.s
+
+# target to generate assembly for a file
+base/tc_thread_pool.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/base/tc_thread_pool.cc.s
+.PHONY : base/tc_thread_pool.cc.s
+
+base/util.o: base/util.cpp.o
+.PHONY : base/util.o
+
+# target to build an object file
+base/util.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/base/util.cpp.o
+.PHONY : base/util.cpp.o
+
+base/util.i: base/util.cpp.i
+.PHONY : base/util.i
+
+# target to preprocess a source file
+base/util.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/base/util.cpp.i
+.PHONY : base/util.cpp.i
+
+base/util.s: base/util.cpp.s
+.PHONY : base/util.s
+
+# target to generate assembly for a file
+base/util.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/base/util.cpp.s
+.PHONY : base/util.cpp.s
+
+base/util_pdu.o: base/util_pdu.cc.o
+.PHONY : base/util_pdu.o
+
+# target to build an object file
+base/util_pdu.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/base/util_pdu.cc.o
+.PHONY : base/util_pdu.cc.o
+
+base/util_pdu.i: base/util_pdu.cc.i
+.PHONY : base/util_pdu.i
+
+# target to preprocess a source file
+base/util_pdu.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/base/util_pdu.cc.i
+.PHONY : base/util_pdu.cc.i
+
+base/util_pdu.s: base/util_pdu.cc.s
+.PHONY : base/util_pdu.s
+
+# target to generate assembly for a file
+base/util_pdu.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/base/util_pdu.cc.s
+.PHONY : base/util_pdu.cc.s
+
+grpc/image_service.grpc.pb.o: grpc/image_service.grpc.pb.cc.o
+.PHONY : grpc/image_service.grpc.pb.o
+
+# target to build an object file
+grpc/image_service.grpc.pb.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/grpc/image_service.grpc.pb.cc.o
+.PHONY : grpc/image_service.grpc.pb.cc.o
+
+grpc/image_service.grpc.pb.i: grpc/image_service.grpc.pb.cc.i
+.PHONY : grpc/image_service.grpc.pb.i
+
+# target to preprocess a source file
+grpc/image_service.grpc.pb.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/grpc/image_service.grpc.pb.cc.i
+.PHONY : grpc/image_service.grpc.pb.cc.i
+
+grpc/image_service.grpc.pb.s: grpc/image_service.grpc.pb.cc.s
+.PHONY : grpc/image_service.grpc.pb.s
+
+# target to generate assembly for a file
+grpc/image_service.grpc.pb.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/grpc/image_service.grpc.pb.cc.s
+.PHONY : grpc/image_service.grpc.pb.cc.s
+
+grpc/image_service.pb.o: grpc/image_service.pb.cc.o
+.PHONY : grpc/image_service.pb.o
+
+# target to build an object file
+grpc/image_service.pb.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/grpc/image_service.pb.cc.o
+.PHONY : grpc/image_service.pb.cc.o
+
+grpc/image_service.pb.i: grpc/image_service.pb.cc.i
+.PHONY : grpc/image_service.pb.i
+
+# target to preprocess a source file
+grpc/image_service.pb.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/grpc/image_service.pb.cc.i
+.PHONY : grpc/image_service.pb.cc.i
+
+grpc/image_service.pb.s: grpc/image_service.pb.cc.s
+.PHONY : grpc/image_service.pb.s
+
+# target to generate assembly for a file
+grpc/image_service.pb.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/grpc/image_service.pb.cc.s
+.PHONY : grpc/image_service.pb.cc.s
+
+http_conn.o: http_conn.cc.o
+.PHONY : http_conn.o
+
+# target to build an object file
+http_conn.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/http_conn.cc.o
+.PHONY : http_conn.cc.o
+
+http_conn.i: http_conn.cc.i
+.PHONY : http_conn.i
+
+# target to preprocess a source file
+http_conn.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/http_conn.cc.i
+.PHONY : http_conn.cc.i
+
+http_conn.s: http_conn.cc.s
+.PHONY : http_conn.s
+
+# target to generate assembly for a file
+http_conn.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/http_conn.cc.s
+.PHONY : http_conn.cc.s
+
+jsoncpp/json_reader.o: jsoncpp/json_reader.cpp.o
+.PHONY : jsoncpp/json_reader.o
+
+# target to build an object file
+jsoncpp/json_reader.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/jsoncpp/json_reader.cpp.o
+.PHONY : jsoncpp/json_reader.cpp.o
+
+jsoncpp/json_reader.i: jsoncpp/json_reader.cpp.i
+.PHONY : jsoncpp/json_reader.i
+
+# target to preprocess a source file
+jsoncpp/json_reader.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/jsoncpp/json_reader.cpp.i
+.PHONY : jsoncpp/json_reader.cpp.i
+
+jsoncpp/json_reader.s: jsoncpp/json_reader.cpp.s
+.PHONY : jsoncpp/json_reader.s
+
+# target to generate assembly for a file
+jsoncpp/json_reader.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/jsoncpp/json_reader.cpp.s
+.PHONY : jsoncpp/json_reader.cpp.s
+
+jsoncpp/json_value.o: jsoncpp/json_value.cpp.o
+.PHONY : jsoncpp/json_value.o
+
+# target to build an object file
+jsoncpp/json_value.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/jsoncpp/json_value.cpp.o
+.PHONY : jsoncpp/json_value.cpp.o
+
+jsoncpp/json_value.i: jsoncpp/json_value.cpp.i
+.PHONY : jsoncpp/json_value.i
+
+# target to preprocess a source file
+jsoncpp/json_value.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/jsoncpp/json_value.cpp.i
+.PHONY : jsoncpp/json_value.cpp.i
+
+jsoncpp/json_value.s: jsoncpp/json_value.cpp.s
+.PHONY : jsoncpp/json_value.s
+
+# target to generate assembly for a file
+jsoncpp/json_value.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/jsoncpp/json_value.cpp.s
+.PHONY : jsoncpp/json_value.cpp.s
+
+jsoncpp/json_writer.o: jsoncpp/json_writer.cpp.o
+.PHONY : jsoncpp/json_writer.o
+
+# target to build an object file
+jsoncpp/json_writer.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/jsoncpp/json_writer.cpp.o
+.PHONY : jsoncpp/json_writer.cpp.o
+
+jsoncpp/json_writer.i: jsoncpp/json_writer.cpp.i
+.PHONY : jsoncpp/json_writer.i
+
+# target to preprocess a source file
+jsoncpp/json_writer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/jsoncpp/json_writer.cpp.i
+.PHONY : jsoncpp/json_writer.cpp.i
+
+jsoncpp/json_writer.s: jsoncpp/json_writer.cpp.s
+.PHONY : jsoncpp/json_writer.s
+
+# target to generate assembly for a file
+jsoncpp/json_writer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/jsoncpp/json_writer.cpp.s
+.PHONY : jsoncpp/json_writer.cpp.s
+
+main.o: main.cc.o
+.PHONY : main.o
+
+# target to build an object file
+main.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/main.cc.o
+.PHONY : main.cc.o
+
+main.i: main.cc.i
+.PHONY : main.i
+
+# target to preprocess a source file
+main.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/main.cc.i
+.PHONY : main.cc.i
+
+main.s: main.cc.s
+.PHONY : main.s
+
+# target to generate assembly for a file
+main.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/main.cc.s
+.PHONY : main.cc.s
+
+mysql/db_pool.o: mysql/db_pool.cc.o
+.PHONY : mysql/db_pool.o
+
+# target to build an object file
+mysql/db_pool.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/mysql/db_pool.cc.o
+.PHONY : mysql/db_pool.cc.o
+
+mysql/db_pool.i: mysql/db_pool.cc.i
+.PHONY : mysql/db_pool.i
+
+# target to preprocess a source file
+mysql/db_pool.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/mysql/db_pool.cc.i
+.PHONY : mysql/db_pool.cc.i
+
+mysql/db_pool.s: mysql/db_pool.cc.s
+.PHONY : mysql/db_pool.s
+
+# target to generate assembly for a file
+mysql/db_pool.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/mysql/db_pool.cc.s
+.PHONY : mysql/db_pool.cc.s
 
 # Help Target
 help:
@@ -473,49 +833,94 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... mysql_test"
-	@echo "... home/jerry/Desktop/questionnare/questionnare-src/base/base_socket.o"
-	@echo "... home/jerry/Desktop/questionnare/questionnare-src/base/base_socket.i"
-	@echo "... home/jerry/Desktop/questionnare/questionnare-src/base/base_socket.s"
-	@echo "... home/jerry/Desktop/questionnare/questionnare-src/base/config_file_reader.o"
-	@echo "... home/jerry/Desktop/questionnare/questionnare-src/base/config_file_reader.i"
-	@echo "... home/jerry/Desktop/questionnare/questionnare-src/base/config_file_reader.s"
-	@echo "... home/jerry/Desktop/questionnare/questionnare-src/base/dlog.o"
-	@echo "... home/jerry/Desktop/questionnare/questionnare-src/base/dlog.i"
-	@echo "... home/jerry/Desktop/questionnare/questionnare-src/base/dlog.s"
-	@echo "... home/jerry/Desktop/questionnare/questionnare-src/base/event_dispatch.o"
-	@echo "... home/jerry/Desktop/questionnare/questionnare-src/base/event_dispatch.i"
-	@echo "... home/jerry/Desktop/questionnare/questionnare-src/base/event_dispatch.s"
-	@echo "... home/jerry/Desktop/questionnare/questionnare-src/base/http_parser.o"
-	@echo "... home/jerry/Desktop/questionnare/questionnare-src/base/http_parser.i"
-	@echo "... home/jerry/Desktop/questionnare/questionnare-src/base/http_parser.s"
-	@echo "... home/jerry/Desktop/questionnare/questionnare-src/base/http_parser_wrapper.o"
-	@echo "... home/jerry/Desktop/questionnare/questionnare-src/base/http_parser_wrapper.i"
-	@echo "... home/jerry/Desktop/questionnare/questionnare-src/base/http_parser_wrapper.s"
-	@echo "... home/jerry/Desktop/questionnare/questionnare-src/base/lock.o"
-	@echo "... home/jerry/Desktop/questionnare/questionnare-src/base/lock.i"
-	@echo "... home/jerry/Desktop/questionnare/questionnare-src/base/lock.s"
-	@echo "... home/jerry/Desktop/questionnare/questionnare-src/base/netlib.o"
-	@echo "... home/jerry/Desktop/questionnare/questionnare-src/base/netlib.i"
-	@echo "... home/jerry/Desktop/questionnare/questionnare-src/base/netlib.s"
-	@echo "... home/jerry/Desktop/questionnare/questionnare-src/base/tc_common.o"
-	@echo "... home/jerry/Desktop/questionnare/questionnare-src/base/tc_common.i"
-	@echo "... home/jerry/Desktop/questionnare/questionnare-src/base/tc_common.s"
-	@echo "... home/jerry/Desktop/questionnare/questionnare-src/base/tc_thread_pool.o"
-	@echo "... home/jerry/Desktop/questionnare/questionnare-src/base/tc_thread_pool.i"
-	@echo "... home/jerry/Desktop/questionnare/questionnare-src/base/tc_thread_pool.s"
-	@echo "... home/jerry/Desktop/questionnare/questionnare-src/base/util.o"
-	@echo "... home/jerry/Desktop/questionnare/questionnare-src/base/util.i"
-	@echo "... home/jerry/Desktop/questionnare/questionnare-src/base/util.s"
-	@echo "... home/jerry/Desktop/questionnare/questionnare-src/base/util_pdu.o"
-	@echo "... home/jerry/Desktop/questionnare/questionnare-src/base/util_pdu.i"
-	@echo "... home/jerry/Desktop/questionnare/questionnare-src/base/util_pdu.s"
-	@echo "... home/jerry/Desktop/questionnare/questionnare-src/mysql/db_pool.o"
-	@echo "... home/jerry/Desktop/questionnare/questionnare-src/mysql/db_pool.i"
-	@echo "... home/jerry/Desktop/questionnare/questionnare-src/mysql/db_pool.s"
-	@echo "... mysql_test.o"
-	@echo "... mysql_test.i"
-	@echo "... mysql_test.s"
+	@echo "... qs_http_server"
+	@echo "... api/api_common.o"
+	@echo "... api/api_common.i"
+	@echo "... api/api_common.s"
+	@echo "... api/api_deal_table.o"
+	@echo "... api/api_deal_table.i"
+	@echo "... api/api_deal_table.s"
+	@echo "... api/api_login.o"
+	@echo "... api/api_login.i"
+	@echo "... api/api_login.s"
+	@echo "... api/api_mytables.o"
+	@echo "... api/api_mytables.i"
+	@echo "... api/api_mytables.s"
+	@echo "... api/api_register.o"
+	@echo "... api/api_register.i"
+	@echo "... api/api_register.s"
+	@echo "... api/api_root_create_table.o"
+	@echo "... api/api_root_create_table.i"
+	@echo "... api/api_root_create_table.s"
+	@echo "... api/api_root_delete_table.o"
+	@echo "... api/api_root_delete_table.i"
+	@echo "... api/api_root_delete_table.s"
+	@echo "... api/api_root_tables.o"
+	@echo "... api/api_root_tables.i"
+	@echo "... api/api_root_tables.s"
+	@echo "... api/api_unreg.o"
+	@echo "... api/api_unreg.i"
+	@echo "... api/api_unreg.s"
+	@echo "... base/base_socket.o"
+	@echo "... base/base_socket.i"
+	@echo "... base/base_socket.s"
+	@echo "... base/config_file_reader.o"
+	@echo "... base/config_file_reader.i"
+	@echo "... base/config_file_reader.s"
+	@echo "... base/dlog.o"
+	@echo "... base/dlog.i"
+	@echo "... base/dlog.s"
+	@echo "... base/event_dispatch.o"
+	@echo "... base/event_dispatch.i"
+	@echo "... base/event_dispatch.s"
+	@echo "... base/http_parser.o"
+	@echo "... base/http_parser.i"
+	@echo "... base/http_parser.s"
+	@echo "... base/http_parser_wrapper.o"
+	@echo "... base/http_parser_wrapper.i"
+	@echo "... base/http_parser_wrapper.s"
+	@echo "... base/lock.o"
+	@echo "... base/lock.i"
+	@echo "... base/lock.s"
+	@echo "... base/netlib.o"
+	@echo "... base/netlib.i"
+	@echo "... base/netlib.s"
+	@echo "... base/tc_common.o"
+	@echo "... base/tc_common.i"
+	@echo "... base/tc_common.s"
+	@echo "... base/tc_thread_pool.o"
+	@echo "... base/tc_thread_pool.i"
+	@echo "... base/tc_thread_pool.s"
+	@echo "... base/util.o"
+	@echo "... base/util.i"
+	@echo "... base/util.s"
+	@echo "... base/util_pdu.o"
+	@echo "... base/util_pdu.i"
+	@echo "... base/util_pdu.s"
+	@echo "... grpc/image_service.grpc.pb.o"
+	@echo "... grpc/image_service.grpc.pb.i"
+	@echo "... grpc/image_service.grpc.pb.s"
+	@echo "... grpc/image_service.pb.o"
+	@echo "... grpc/image_service.pb.i"
+	@echo "... grpc/image_service.pb.s"
+	@echo "... http_conn.o"
+	@echo "... http_conn.i"
+	@echo "... http_conn.s"
+	@echo "... jsoncpp/json_reader.o"
+	@echo "... jsoncpp/json_reader.i"
+	@echo "... jsoncpp/json_reader.s"
+	@echo "... jsoncpp/json_value.o"
+	@echo "... jsoncpp/json_value.i"
+	@echo "... jsoncpp/json_value.s"
+	@echo "... jsoncpp/json_writer.o"
+	@echo "... jsoncpp/json_writer.i"
+	@echo "... jsoncpp/json_writer.s"
+	@echo "... main.o"
+	@echo "... main.i"
+	@echo "... main.s"
+	@echo "... mysql/db_pool.o"
+	@echo "... mysql/db_pool.i"
+	@echo "... mysql/db_pool.s"
 .PHONY : help
 
 

@@ -84,7 +84,7 @@ INSERT INTO options (question_id, content) VALUES (1, '快餐');
 sql
 复制代码
 -- 插入 root 用户
-INSERT INTO users (username, password, is_root) VALUES ('admin', 'password123', 1);
+INSERT INTO Users (user_name, password, is_root) VALUES ('root', MD5('123456'), 1);
 
 -- 插入问卷
 INSERT INTO surveys (title, description, created_by) VALUES ('饮食习惯调查', '请告诉我们您的饮食习惯', 1);
@@ -120,5 +120,5 @@ USE survey_system;
 
 bash
 复制代码
-SOURCE /home/jerry/Desktop/questionnare/questionnare.sql;
+source /home/jerry/Desktop/questionnare/sql/questionnare.sql;
 将 /path/to/your/setup.sql 替换为实际文件路径。

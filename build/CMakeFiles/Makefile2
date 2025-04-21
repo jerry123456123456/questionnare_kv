@@ -54,7 +54,7 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/jerry/Desktop/questionnare/questionnare-src/test/mysql_test
+CMAKE_SOURCE_DIR = /home/jerry/Desktop/questionnare/questionnare-src
 
 # The top-level build directory on which CMake was run.
 CMAKE_BINARY_DIR = /home/jerry/Desktop/questionnare/build
@@ -63,7 +63,7 @@ CMAKE_BINARY_DIR = /home/jerry/Desktop/questionnare/build
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles/mysql_test.dir/all
+all: CMakeFiles/qs_http_server.dir/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
@@ -71,34 +71,34 @@ preinstall:
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: CMakeFiles/mysql_test.dir/clean
+clean: CMakeFiles/qs_http_server.dir/clean
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/mysql_test.dir
+# Target rules for target CMakeFiles/qs_http_server.dir
 
 # All Build rule for target.
-CMakeFiles/mysql_test.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mysql_test.dir/build.make CMakeFiles/mysql_test.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mysql_test.dir/build.make CMakeFiles/mysql_test.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/jerry/Desktop/questionnare/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15 "Built target mysql_test"
-.PHONY : CMakeFiles/mysql_test.dir/all
+CMakeFiles/qs_http_server.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/jerry/Desktop/questionnare/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30 "Built target qs_http_server"
+.PHONY : CMakeFiles/qs_http_server.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/mysql_test.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/jerry/Desktop/questionnare/build/CMakeFiles 15
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/mysql_test.dir/all
+CMakeFiles/qs_http_server.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jerry/Desktop/questionnare/build/CMakeFiles 30
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/qs_http_server.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/jerry/Desktop/questionnare/build/CMakeFiles 0
-.PHONY : CMakeFiles/mysql_test.dir/rule
+.PHONY : CMakeFiles/qs_http_server.dir/rule
 
 # Convenience name for target.
-mysql_test: CMakeFiles/mysql_test.dir/rule
-.PHONY : mysql_test
+qs_http_server: CMakeFiles/qs_http_server.dir/rule
+.PHONY : qs_http_server
 
 # clean rule for target.
-CMakeFiles/mysql_test.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mysql_test.dir/build.make CMakeFiles/mysql_test.dir/clean
-.PHONY : CMakeFiles/mysql_test.dir/clean
+CMakeFiles/qs_http_server.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qs_http_server.dir/build.make CMakeFiles/qs_http_server.dir/clean
+.PHONY : CMakeFiles/qs_http_server.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

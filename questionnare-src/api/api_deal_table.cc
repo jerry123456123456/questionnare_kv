@@ -216,7 +216,7 @@ int handleUpdateQuestion(string user, string questionname, string table_name, st
     delete update_stmt;
 
     // 更新缓存
-    if (CacheIncrCount(user) < 0) {
+    if (CacheIncrCount(TABLE_USER_COUNT + user) < 0) {
         LogError("CacheIncrCount 操作失败");
     }
 
@@ -311,7 +311,7 @@ int handleDeleteTable(string user, string table_name) {
     }
 
     // 查询用户表数量-1（假设这里和更新操作类似，也需要对缓存进行处理，这里是数量减1）
-    if (CacheDecrCount(user) < 0) {
+    if (CacheDecrCount(TABLE_USER_COUNT + user) < 0) {
         LogError(" CacheDecrCount 操作失败");
     }
 

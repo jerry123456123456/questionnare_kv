@@ -1,0 +1,771 @@
+{
+	"artifacts" : 
+	[
+		{
+			"path" : "qs_http_server"
+		}
+	],
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_executable",
+			"LINK_DIRECTORIES",
+			"target_link_libraries",
+			"add_compile_options",
+			"ADD_DEFINITIONS",
+			"INCLUDE_DIRECTORIES"
+		],
+		"files" : 
+		[
+			"CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 60,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 33,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 63,
+				"parent" : 0
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 24,
+				"parent" : 0
+			},
+			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 28,
+				"parent" : 0
+			},
+			{
+				"command" : 5,
+				"file" : 0,
+				"line" : 36,
+				"parent" : 0
+			},
+			{
+				"command" : 5,
+				"file" : 0,
+				"line" : 44,
+				"parent" : 0
+			},
+			{
+				"command" : 5,
+				"file" : 0,
+				"line" : 45,
+				"parent" : 0
+			},
+			{
+				"command" : 5,
+				"file" : 0,
+				"line" : 46,
+				"parent" : 0
+			},
+			{
+				"command" : 5,
+				"file" : 0,
+				"line" : 48,
+				"parent" : 0
+			},
+			{
+				"command" : 5,
+				"file" : 0,
+				"line" : 49,
+				"parent" : 0
+			},
+			{
+				"command" : 5,
+				"file" : 0,
+				"line" : 50,
+				"parent" : 0
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "-g   -g -Wno-deprecated -Wno-unused-parameter -Bsymbolic"
+				},
+				{
+					"backtrace" : 4,
+					"fragment" : "-w"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"backtrace" : 5,
+					"define" : "AC_HAS_CRITICAL"
+				},
+				{
+					"backtrace" : 5,
+					"define" : "AC_HAS_DEBUG"
+				},
+				{
+					"backtrace" : 5,
+					"define" : "AC_HAS_ERROR"
+				},
+				{
+					"backtrace" : 5,
+					"define" : "AC_HAS_INFO"
+				},
+				{
+					"backtrace" : 5,
+					"define" : "AC_HAS_WARNING"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "CARES_STATICLIB"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "FMT_LOCALE"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "FMT_SHARED"
+				},
+				{
+					"backtrace" : 5,
+					"define" : "LINUX_DAEMON"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "SPDLOG_COMPILED_LIB"
+				},
+				{
+					"backtrace" : 5,
+					"define" : "TIXML_USE_STL"
+				},
+				{
+					"backtrace" : 5,
+					"define" : "_FILE_OFFSET_BITS=64"
+				},
+				{
+					"backtrace" : 5,
+					"define" : "_REENTRANT"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 6,
+					"path" : "/usr/local/include/hiredis"
+				},
+				{
+					"backtrace" : 6,
+					"path" : "/usr/include/mysql"
+				},
+				{
+					"backtrace" : 7,
+					"path" : "/home/jerry/Desktop/questionnare/questionnare-src/base"
+				},
+				{
+					"backtrace" : 8,
+					"path" : "/home/jerry/Desktop/questionnare/questionnare-src/jsoncpp"
+				},
+				{
+					"backtrace" : 9,
+					"path" : "/home/jerry/Desktop/questionnare/questionnare-src/mysql"
+				},
+				{
+					"backtrace" : 10,
+					"path" : "/home/jerry/Desktop/questionnare/questionnare-src/api"
+				},
+				{
+					"backtrace" : 11,
+					"path" : "/home/jerry/Desktop/questionnare/questionnare-src/grpc"
+				},
+				{
+					"backtrace" : 12,
+					"path" : "/home/jerry/Desktop/questionnare/questionnare-src"
+				}
+			],
+			"language" : "CXX",
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11,
+				12,
+				13,
+				14,
+				15,
+				16,
+				17,
+				18,
+				19,
+				20,
+				21,
+				22,
+				23,
+				24,
+				25,
+				26,
+				27,
+				28
+			]
+		}
+	],
+	"id" : "qs_http_server::@6890427a1f51a3e7e1df",
+	"link" : 
+	{
+		"commandFragments" : 
+		[
+			{
+				"fragment" : "-g",
+				"role" : "flags"
+			},
+			{
+				"fragment" : "-rdynamic",
+				"role" : "flags"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "-L/usr/local/lib",
+				"role" : "libraryPath"
+			},
+			{
+				"fragment" : "-Wl,-rpath,/usr/local/lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 3,
+				"fragment" : "-lpthread",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 3,
+				"fragment" : "-lmysqlclient",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 3,
+				"fragment" : "/usr/lib/x86_64-linux-gnu/libfmt.so.8.1.1",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 3,
+				"fragment" : "/usr/local/lib/libspdlogd.a",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 3,
+				"fragment" : "/usr/local/lib/libgrpc++.a",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 3,
+				"fragment" : "/usr/local/lib/libgrpc++_reflection.a",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 3,
+				"fragment" : "/usr/local/lib/libprotobuf.so",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-Wl,--as-needed",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 3,
+				"fragment" : "/usr/local/lib/libgrpc++.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/lib/libgrpc.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/lib/libz.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/lib/libcares.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/lib/libaddress_sorting.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/lib/libre2.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/lib/libabsl_raw_hash_set.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/lib/libabsl_hashtablez_sampler.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/lib/libabsl_hash.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/lib/libabsl_city.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/lib/libabsl_low_level_hash.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/lib/libabsl_statusor.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/lib/libabsl_bad_variant_access.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/lib/libgpr.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/lib/libupb.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/lib/libabsl_status.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/lib/libabsl_random_distributions.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/lib/libabsl_random_seed_sequences.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/lib/libabsl_random_internal_pool_urbg.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/lib/libabsl_random_internal_randen.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/lib/libabsl_random_internal_randen_hwaes.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/lib/libabsl_random_internal_randen_hwaes_impl.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/lib/libabsl_random_internal_randen_slow.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/lib/libabsl_random_internal_platform.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/lib/libabsl_random_internal_seed_material.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/lib/libabsl_random_seed_gen_exception.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/lib/libabsl_cord.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/lib/libabsl_bad_optional_access.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/lib/libabsl_cordz_info.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/lib/libabsl_cord_internal.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/lib/libabsl_cordz_functions.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/lib/libabsl_exponential_biased.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/lib/libabsl_cordz_handle.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/lib/libabsl_str_format_internal.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/lib/libabsl_synchronization.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/lib/libabsl_stacktrace.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/lib/libabsl_symbolize.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/lib/libabsl_debugging_internal.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/lib/libabsl_demangle_internal.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/lib/libabsl_graphcycles_internal.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/lib/libabsl_malloc_internal.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/lib/libabsl_time.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/lib/libabsl_strings.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/lib/libabsl_throw_delegate.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/lib/libabsl_int128.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/lib/libabsl_strings_internal.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/lib/libabsl_base.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/lib/libabsl_spinlock_wait.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-lrt",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/lib/libabsl_raw_logging_internal.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/lib/libabsl_log_severity.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/lib/libabsl_civil_time.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/lib/libabsl_time_zone.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/lib/libssl.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/lib/libcrypto.a",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 3,
+				"fragment" : "-lpthread",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 3,
+				"fragment" : "/usr/local/lib/libprotobuf.so",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-ldl",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-lm",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-lrt",
+				"role" : "libraries"
+			}
+		],
+		"language" : "CXX"
+	},
+	"name" : "qs_http_server",
+	"nameOnDisk" : "qs_http_server",
+	"paths" : 
+	{
+		"build" : ".",
+		"source" : "."
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11,
+				12,
+				13,
+				14,
+				15,
+				16,
+				17,
+				18,
+				19,
+				20,
+				21,
+				22,
+				23,
+				24,
+				25,
+				26,
+				27,
+				28
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "grpc/image_service.grpc.pb.cc",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "grpc/image_service.pb.cc",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "http_conn.cc",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "main.cc",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "base/base_socket.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "base/config_file_reader.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "base/dlog.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "base/event_dispatch.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "base/http_parser.cc",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "base/http_parser_wrapper.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "base/lock.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "base/netlib.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "base/tc_common.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "base/tc_thread_pool.cc",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "base/util.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "base/util_pdu.cc",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "mysql/db_pool.cc",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "api/api_common.cc",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "api/api_deal_table.cc",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "api/api_login.cc",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "api/api_mytables.cc",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "api/api_register.cc",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "api/api_root_create_table.cc",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "api/api_root_delete_table.cc",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "api/api_root_tables.cc",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "api/api_unreg.cc",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "jsoncpp/json_reader.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "jsoncpp/json_value.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "jsoncpp/json_writer.cpp",
+			"sourceGroupIndex" : 0
+		}
+	],
+	"type" : "EXECUTABLE"
+}

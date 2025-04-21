@@ -15,19 +15,6 @@ std::string FormatString(const std::string &format, Args... args) {
                        buf.get() + size - 1); // We don't want the '\0' inside
 }
 
-//mysql存储的部分信息加载kvstore缓存
-extern int ApiInit();
-
-extern int CacheSetCount( std::string key, int64_t count);
-
-extern int CacheGetCount( std::string key, int64_t &count);
-
-// 键值递增
-extern int CacheIncrCount( std::string key);
-
-// 键值递减
-extern int CacheDecrCount( std::string key);
-
 //获取每个用户可以填写的调查问卷表的个数
 int DBGetUserTableCountByUsername(CDBConn *db_conn, string user_name, int &count) {
     count = 0;

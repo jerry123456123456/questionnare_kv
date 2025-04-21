@@ -27,7 +27,7 @@
 					[
 						0
 					],
-					"name" : "mysql_test",
+					"name" : "qs_http_server",
 					"targetIndexes" : 
 					[
 						0
@@ -38,9 +38,9 @@
 			[
 				{
 					"directoryIndex" : 0,
-					"id" : "mysql_test::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-mysql_test-Debug-4c5a34a1cee39e5acb4d.json",
-					"name" : "mysql_test",
+					"id" : "qs_http_server::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-qs_http_server-Debug-64b06ca8ea7afe591321.json",
+					"name" : "qs_http_server",
 					"projectIndex" : 0
 				}
 			]
@@ -50,7 +50,7 @@
 	"paths" : 
 	{
 		"build" : "/home/jerry/Desktop/questionnare/build",
-		"source" : "/home/jerry/Desktop/questionnare/questionnare-src/test/mysql_test"
+		"source" : "/home/jerry/Desktop/questionnare/questionnare-src"
 	},
 	"version" : 
 	{
