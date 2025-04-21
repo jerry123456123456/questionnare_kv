@@ -1,0 +1,3 @@
+/home/jerry/Desktop/questionnare/build/CMakeFiles/mysql_test.dir
+/home/jerry/Desktop/questionnare/build/CMakeFiles/edit_cache.dir
+/home/jerry/Desktop/questionnare/build/CMakeFiles/rebuild_cache.dir

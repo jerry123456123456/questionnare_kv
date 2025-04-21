@@ -1,0 +1,10 @@
+root@k8s-master1:/etc/nginx/conf.d# 
+
+####以后改nginx的配置在这个文件下改
+
+nginx  -t
+nginx  -s reload
+
+####使用系统命令
+
+

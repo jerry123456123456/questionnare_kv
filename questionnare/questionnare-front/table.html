@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>调查问卷系统</title>
+    <link rel="icon" href="logo.ico">
+    <style>
+        /* 整体页面布局样式 */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('reg_background.png');
+            background-size: 100% 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center; /* 水平居中 */
+            align-items: center; /* 垂直居中 */
+            position: relative;
+        }
+
+        form {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 5px;
+            width: 600px; /* 设置宽度，可根据需要调整此值 */
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .question {
+            margin-bottom: 20px;
+        }
+
+        .radio-group,
+        .checkbox-group {
+            margin-top: 5px;
+        }
+
+        .radio-group label,
+        .checkbox-group label {
+            margin-right: 15px;
+        }
+
+        .submit-button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* 右上角用户名和返回按钮 */
+        .top-right {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 16px;
+        }
+
+        .back-button {
+            margin-left: 10px;
+            padding: 5px 10px;
+            background-color: #f44336;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+
+<body>
+  <!-- 右上角用户名和返回主页按钮 -->
+  <div class="top-right">
+      <span id="username"></span>
+      <button class="back-button" onclick="goBackHome()">返回主页</button>
+  </div>
+
+  <form id="survey-form">
+      <!-- 这里将动态插入问卷标题 -->
+      <h2 id="survey-title"></h2>
+      <!-- 问卷问题将动态插入此处 -->
+  </form>
+
+  <script>
+      window.onload = function () {
+          const user = sessionStorage.getItem("username");
+          const token = sessionStorage.getItem("token");
+          const title = sessionStorage.getItem('title');
+
+          const jsonData = {
+              "user": user,
+              "token": token,
+              "title": title
+          };
+
+          // 在页面右上角显示用户名
+          const usernameElement = document.getElementById('username');
+          usernameElement.textContent = `用户名: ${user}`;
+
+          fetch('http://192.168.186.138/api/mytables?cmd=normal', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(jsonData)
+          })
+          .then(response => {
+              if (response.ok) {
+                  return response.json();
+              } else {
+                  throw new Error('请求失败');
+              }
+          })
+          .then(response => {
+              console.log('返回数据：', response);
+              const surveyTitleElement = document.getElementById('survey-title');
+              surveyTitleElement.textContent = response.survey_title;
+
+              const form = document.getElementById('survey-form');
+              const questions = response.questions;
+              questions.forEach((question, index) => {
+                  const questionDiv = document.createElement('div');
+                  questionDiv.classList.add('question');
+
+                  const questionNumber = document.createElement('span');
+                  questionNumber.textContent = `${index + 1}. `;
+
+                  // 添加题目类型显示
+                  const questionTypeMap = {
+                      'single_choice': '单选',
+                      'multiple_choice': '多选',
+                      'fill_in_blank': '填空'
+                  };
+
+                  const questionTypeSpan = document.createElement('span');
+                  questionTypeSpan.textContent = `(${questionTypeMap[question.question_type]}) `;
+                  questionDiv.appendChild(questionNumber);
+                  questionDiv.appendChild(questionTypeSpan);
+
+                  const questionText = document.createElement('label');
+                  questionText.textContent = question.question_text;
+                  questionDiv.appendChild(questionText);
+
+                  if (question.question_type === 'single_choice') {
+                      const radioGroup = document.createElement('div');
+                      radioGroup.classList.add('radio-group');
+                      question.options.forEach((option, optionIndex) => {
+                          const radioLabel = document.createElement('label');
+                          const radioInput = document.createElement('input');
+                          radioInput.type = 'radio';
+                          radioInput.name = `question${index}`;
+                          radioInput.value = option.option_text;
+                          const optionLetter = String.fromCharCode(65 + optionIndex);
+                          radioLabel.textContent = `${optionLetter}. ${option.option_text}`;
+                          radioLabel.prepend(radioInput);
+                          radioGroup.appendChild(radioLabel);
+                      });
+                      questionDiv.appendChild(radioGroup);
+                  } else if (question.question_type === 'multiple_choice') {
+                      const checkboxGroup = document.createElement('div');
+                      checkboxGroup.classList.add('checkbox-group');
+                      question.options.forEach((option, optionIndex) => {
+                          const checkboxLabel = document.createElement('label');
+                          const checkboxInput = document.createElement('input');
+                          checkboxInput.type = 'checkbox';
+                          checkboxInput.name = `question${index}`;
+                          checkboxInput.value = option.option_text;
+                          const optionLetter = String.fromCharCode(65 + optionIndex);
+                          checkboxLabel.textContent = `${optionLetter}. ${option.option_text}`;
+                          checkboxLabel.prepend(checkboxInput);
+                          checkboxGroup.appendChild(checkboxLabel);
+                      });
+                      questionDiv.appendChild(checkboxGroup);
+                  } else if (question.question_type === 'fill_in_blank') {
+                      const input = document.createElement('input');
+                      input.type = 'text';
+                      input.name = `question${index}`;
+                      questionDiv.appendChild(input);
+                  }
+
+                  form.appendChild(questionDiv);
+              });
+
+              const submitButton = document.createElement('button');
+              submitButton.classList.add('submit-button');
+              submitButton.textContent = '提交问卷';
+              form.appendChild(submitButton);
+
+              // 提交按钮点击事件
+              submitButton.addEventListener('click', function (event) {
+                  event.preventDefault();
+
+                  const answers = [];
+                  let isValid = true;
+                  const unansweredQuestions = []; // 未填写的问题
+
+                  questions.forEach((question, index) => {
+                      const answer = {};
+
+                      answer.question_text = question.question_text;
+
+                      // 处理单选题
+                      if (question.question_type === 'single_choice') {
+                          const selectedOption = form.querySelector(`input[name="question${index}"]:checked`);
+                          answer.answer = selectedOption ? selectedOption.value : '';
+                          if (!answer.answer) {
+                              isValid = false;
+                              unansweredQuestions.push(question.question_text);
+                          } else {
+                              answers.push(answer);
+                          }
+                      }
+                      // 处理多选题
+                      else if (question.question_type === 'multiple_choice') {
+                          const selectedOptions = form.querySelectorAll(`input[name="question${index}"]:checked`);
+                          if (selectedOptions.length === 0) {
+                              isValid = false;
+                              unansweredQuestions.push(question.question_text);
+                          }
+                          selectedOptions.forEach(option => {
+                              answer.answer = option.value;
+                              answers.push(Object.assign({}, answer)); // 深拷贝 answer，避免覆盖问题
+                          });
+                      }
+                      // 处理填空题
+                      else if (question.question_type === 'fill_in_blank') {
+                          const fillInInput = form.querySelector(`input[name="question${index}"]`);
+                          answer.answer = fillInInput ? fillInInput.value : '';
+                          if (!answer.answer) {
+                              isValid = false;
+                              unansweredQuestions.push(question.question_text);
+                          } else {
+                              answers.push(answer);
+                          }
+                      }
+                  });
+
+                  // 如果有未填写的题目，提示用户
+                  if (!isValid) {
+                      alert('请填写以下未完成的题目：\n' + unansweredQuestions.join('\n'));
+                  } else {
+                      const submitData = {
+                          user_name: user,
+                          token: token,
+                          table_name: title,
+                          answers: answers
+                      };
+
+                      console.log("提交数据：", submitData);  // 可用于调试
+                      fetch('http://192.168.186.138/api/upload', {
+                          method: 'POST',
+                          headers: {
+                              'Content-Type': 'application/json'
+                          },
+                          body: JSON.stringify(submitData)
+                      })
+                      .then(response => response.json())  // 确保返回JSON格式
+                      .then(response => {
+                          if (response.code === 0) {
+                              alert('问卷提交成功！');
+                              location.href = 'http://192.168.186.138/survey';
+                          } else {
+                              alert('问卷已过期，请返回！');
+                          }
+                      })
+                      .catch(error => {
+                          console.error('提交失败：', error);
+                          alert('提交失败，请稍后再试！');
+                      });
+                  }
+              });
+          })
+          .catch(error => {
+              console.error('接收返回json数据失败，服务器无响应');
+          });
+      };
+
+      // 返回主页的函数
+      function goBackHome() {
+          location.href = 'http://192.168.186.138/survey';
+      }
+  </script>
+</body>
+
+</html>

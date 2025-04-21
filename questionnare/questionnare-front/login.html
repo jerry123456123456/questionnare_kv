@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>调查问卷系统 - 登录</title>
+  <!-- 设置网站图标 -->
+  <link rel="icon" href="logo.ico">
+  <style>
+    /* 整体页面布局样式 */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-image: url('survey.png');
+      background-size: 100% 100%;
+      background-position: center;
+      background-repeat: no-repeat;
+      min-height: 100vh;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      position: relative;
+    }
+
+    /* 登录区域样式 */
+.login-container {
+      width: 300px;
+      height: 300px;
+      text-align: center;
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 20px;
+      border-radius: 5px;
+      position: absolute;
+      top: 50%;
+      right: 10%;
+      transform: translateY(-50%);
+    }
+
+    /* 登录标题样式 */
+    h2 {
+      color: #333;
+    }
+
+    /* 输入框样式 */
+    input[type="text"],
+    input[type="password"],
+    button {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+
+    button {
+      cursor: pointer;
+      background-color: #007BFF;
+      color: white;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    /* 右侧图片样式 */
+.right-img {
+      width: 300px;
+      height: 200px;
+      position: absolute;
+      top: 70%;
+      right: 10%;
+      transform: translateY(-50%);
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+</head>
+
+<body>
+  <div class="login-container">
+    <h2>用户登录</h2>
+    <input type="text" id="username" placeholder="用户名">
+    <input type="password" id="password" placeholder="密码">
+    <button onclick="login()">登录</button>
+    <button onclick="register()">注册账号</button>
+  </div>
+
+  <!-- 添加右侧的图片 -->
+  <!--img class="right-img" src="l.png" alt="右侧图片"-->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <script>
+    // 加密函数（使用crypto-js库的MD5函数，后续可考虑更换为更安全的加密算法，如SHA-256等）
+    function md5(input) {
+        return CryptoJS.MD5(input).toString();
+    }
+
+    // 通用的请求处理函数，添加超时等逻辑，增强可靠性
+    async function handleRequest(url, options, timeout = 5000) {  // 设置默认超时时间为5秒，可根据实际调整
+        const controller = new AbortController();
+        const id = setTimeout(() => {
+            controller.abort();
+            console.error('请求超时，请稍后再试');
+        }, timeout);
+
+        try {
+            const response = await fetch(url, {
+                ...options,
+                signal: controller.signal
+            });
+
+            clearTimeout(id);
+
+            // 对不同的状态码范围进行更细粒度的处理
+            if (response.status >= 200 && response.status < 300) {
+                return response.json();
+            } else if (response.status === 400) {
+                throw new Error('请求参数错误，请检查输入内容');
+            } else if (response.status === 401) {
+                throw new Error('未授权，请检查用户名和密码');
+            } else if (response.status === 403) {
+                throw new Error('禁止访问，权限不足');
+            } else if (response.status === 404) {
+                throw new Error('请求的资源不存在');
+            } else if (response.status >= 500) {
+                throw new Error('服务器内部错误，请稍后再试');
+            } else {
+                throw new Error('未知错误，请联系管理员');
+            }
+        } catch (error) {
+            if (error.name === 'AbortError') {
+                // 已在超时处理中打印了错误，这里直接抛出，上层调用可选择处理或忽略
+                throw error;
+            }
+            console.error('请求出现错误：', error);
+            throw error;
+        }
+    }
+
+    async function sendLoginRequest(username, encryptedPassword, redirectUrl) {
+        const jsonData = {
+            "user": username,
+            "pwd": encryptedPassword
+        };
+
+        try {
+            const responseData = await handleRequest('http://192.168.186.138/api/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(jsonData)
+            });
+
+            console.log('登录响应：', responseData);
+            if (responseData.code === 0) {
+                alert('登录成功！');
+                sessionStorage.setItem('token', responseData.token);
+                sessionStorage.setItem('username', username);
+                location.href = redirectUrl;
+            } else {
+                alert('登录失败：' + responseData.message);
+            }
+        } catch (error) {
+            console.error('登录请求出现错误：', error);
+            alert(error.message);  // 将捕获到的错误信息展示给用户
+        }
+    }
+
+    function login() {
+        const username = document.getElementById('username').value.trim();  // 去除输入的前后空白字符
+        const password = document.getElementById('password').value;
+
+        // 验证用户名和密码是否为空
+        if (!username) {
+            alert('用户名不能为空，请输入用户名');
+            return;
+        }
+        if (!password) {
+            alert('密码不能为空，请输入密码');
+            return;
+        }
+
+        const encryptedPassword = md5(password);
+
+        if (username === 'root') {
+            sendLoginRequest(username, encryptedPassword, 'http://192.168.186.138/root');
+        } else {
+            sendLoginRequest(username, encryptedPassword, 'http://192.168.186.138/survey');
+        }
+    }
+
+    // 注册函数
+    function register() {
+        window.location.href = 'http://192.168.186.138/reg';
+    }
+</script>
+
+</body>
+
+</html>

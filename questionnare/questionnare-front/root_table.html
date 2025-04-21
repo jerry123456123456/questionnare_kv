@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>调查问卷系统</title>
+    <link rel="icon" href="logo.ico">
+    <style>
+        /* 整体页面布局样式 */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('reg_background.png');
+            background-size: 100% 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center; /* 水平居中 */
+            align-items: center; /* 垂直居中 */
+            position: relative;
+        }
+
+        /* 问卷容器样式 */
+      .survey-container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            text-align: left;
+            width: 80%;
+            margin-top: -150px; /* 根据实际情况调整向上的偏移量，使其在中间偏上位置 */
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+      .question {
+            margin-bottom: 20px;
+        }
+
+      .question-text {
+            font-weight: bold;
+        }
+
+      .options {
+            margin-top: 10px;
+        }
+
+      .option {
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+        }
+
+      .option-text {
+            margin-left: 20px;
+        }
+
+      .option-bar {
+            height: 20px;
+            background-color: #4CAF50;
+            margin-left: 10px;
+        }
+
+      .option-count {
+            margin-left: 10px;
+            font-weight: bold;
+        }
+
+      .fill-in-answer {
+            margin-left: 20px;
+            margin-bottom: 5px;
+        }
+
+        /* 右上角区域样式，用于放置用户名和退出登录按钮 */
+        #header-right {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        button {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 3px;
+            background-color: #f44336;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* 添加按钮容器的样式，用于让按钮在下方居中 */
+      .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* 删除问卷按钮的样式，可按需调整 */
+        #delete-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #FF5733;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="header-right">
+        <button id="logout-btn">退出</button>
+    </div>
+    <div class="survey-container" id="survey-container">
+        <!-- 问卷标题将动态插入此处 -->
+        <h2 id="survey-title"></h2>
+        <!-- 问卷题目及选项等内容将动态添加到此处 -->
+    </div>
+
+    <!-- 添加按钮容器及删除问卷按钮 -->
+    <div class="button-container">
+        <button id="delete-btn">删除问卷</button>
+    </div>
+
+    <script>
+        // 获取退出登录按钮元素
+        const logoutBtn = document.getElementById('logout-btn');
+        logoutBtn.addEventListener('click', function () {
+            // 点击按钮后跳转到登录页面
+            window.location.href = 'http://192.168.186.138/root';
+        });
+
+        // 获取删除问卷按钮元素，并添加点击事件监听器
+        const deleteBtn = document.getElementById('delete-btn');
+        deleteBtn.addEventListener('click', function () {
+            // 询问是否删除
+            if (confirm('确定要删除问卷吗？')) {
+                const tableName = localStorage.getItem('table_name');
+                if (tableName) {
+                    const xhrDelete = new XMLHttpRequest();
+                    xhrDelete.open('POST', 'http://192.168.186.138/api/root/table_delete', true);
+                    xhrDelete.setRequestHeader('Content-Type', 'application/json');
+                    xhrDelete.onreadystatechange = function () {
+                        if (xhrDelete.readyState === 4 && xhrDelete.status === 200) {
+                            const response = JSON.parse(xhrDelete.responseText);
+                            if (response.code === 0) {
+                                // 如果code为0，跳转到指定页面
+                                window.location.href = 'http://192.168.186.138/root';
+                            }
+                        }
+                    };
+                    const jsonData = { "title": tableName };
+                    xhrDelete.send(JSON.stringify(jsonData));
+                }
+            }
+        });
+
+        // 从本地存储获取之前保存的问卷名称
+        const tableName = localStorage.getItem('table_name');
+        if (tableName) {
+            const xhrGetDetails = new XMLHttpRequest();
+            xhrGetDetails.open('POST', 'http://192.168.186.138/api/root/tables?cmd=normal', true);
+            xhrGetDetails.setRequestHeader('Content-Type', 'application/json');
+            xhrGetDetails.onreadystatechange = function () {
+                if (xhrGetDetails.readyState === 4 && xhrGetDetails.status === 200) {
+                    const response = JSON.parse(xhrGetDetails.responseText);
+                    if (response.code === 0) {
+                        const surveyTitle = response.survey_title;
+                        const questions = response.questions;
+
+                        // 在页面中设置问卷标题
+                        const titleElement = document.getElementById('survey-title');
+                        titleElement.textContent = surveyTitle;
+
+                        const container = document.getElementById('survey-container');
+                        questions.forEach((question, index) => {
+                            const questionDiv = document.createElement('div');
+                            questionDiv.classList.add('question');
+
+                            const questionTextElement = document.createElement('p');
+                            questionTextElement.classList.add('question-text');
+                            questionTextElement.textContent = `${index + 1}. ${question.question_text}`;
+                            questionDiv.appendChild(questionTextElement);
+
+                            if (question.question_type === "single_choice" || question.question_type === "multiple_choice") {
+                                const optionsDiv = document.createElement('div');
+                                optionsDiv.classList.add('options');
+                                const maxCount = Math.max(...question.options.map(option => option.option_count)); // 获取最大的选择次数
+
+                                question.options.forEach((option) => {
+                                    const optionDiv = document.createElement('div');
+                                    optionDiv.classList.add('option');
+                                    const optionTextElement = document.createElement('span');
+                                    optionTextElement.classList.add('option-text');
+                                    optionTextElement.textContent = option.option_text;
+                                    optionDiv.appendChild(optionTextElement);
+
+                                    // 创建柱形图
+                                    const optionBar = document.createElement('div');
+                                    optionBar.classList.add('option-bar');
+                                    optionBar.style.width = `${(option.option_count / maxCount) * 100}%`; // 根据最大选择次数计算宽度
+                                    optionDiv.appendChild(optionBar);
+
+                                    const optionCountElement = document.createElement('span');
+                                    optionCountElement.classList.add('option-count');
+                                    optionCountElement.textContent = `选择次数: ${option.option_count}`;
+                                    optionDiv.appendChild(optionCountElement);
+
+                                    optionsDiv.appendChild(optionDiv);
+                                });
+                                questionDiv.appendChild(optionsDiv);
+                            } else if (question.question_type === "fill_in_blank") {
+                                const answersDiv = document.createElement('div');
+                                // 从question对象中获取answers数组（假设答案存储在这个结构里，根据你最开始提供的C++代码逻辑）
+                                const fillInAnswers = question.answers;
+                                if (fillInAnswers && fillInAnswers.length > 0) {
+                                    fillInAnswers.forEach((answerObj) => {
+                                        const answerText = answerObj.answer_text;
+                                        const answerElement = document.createElement('p');
+                                        answerElement.classList.add('fill-in-answer');
+                                        answerElement.textContent = answerText;
+                                        answersDiv.appendChild(answerElement);
+                                    });
+                                }
+                                questionDiv.appendChild(answersDiv);
+                            }
+
+                            container.appendChild(questionDiv);
+                        });
+                    } else {
+                        console.error('获取问卷详情失败：', response.message);
+                    }
+                } else if (xhrGetDetails.readyState === 4) {
+                    console.error('请求问卷详情失败，服务器无响应');
+                }
+            };
+            const jsonData = { "title": tableName };
+            xhrGetDetails.send(JSON.stringify(jsonData));
+        }
+    </script>
+</body>
+
+</html>

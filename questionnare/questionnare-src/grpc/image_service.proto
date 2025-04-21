@@ -1,0 +1,23 @@
+//protoc --cpp_out=. --grpc_out=. --plugin=protoc-gen-grpc=/usr/local/bin/grpc_cpp_plugin image_service.proto
+
+//python3 -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. image_server.proto
+
+syntax = "proto3";
+
+package imageservice;
+
+// 定义一个图片请求，包含一个图像ID（可以是其他字段作为请求条件）
+message ImageRequest {
+    string image_id = 1;  // 可根据需求，传递图片的标识或其他信息
+}
+
+// 定义图片响应，包含图片的二进制数据
+message ImageResponse {
+    bytes image_data = 1;  // 存储图片的二进制数据
+}
+
+// 定义ImageService服务，包含GetImage方法
+service ImageService {
+    // GetImage 方法接收一个 ImageRequest 请求，返回一个 ImageResponse 响应
+    rpc GetImage (ImageRequest) returns (ImageResponse);
+}

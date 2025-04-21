@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>调查问卷系统</title>
+  <link rel="icon" href="logo.ico">
+  <style>
+    /* 整体页面布局样式 */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-image: url('reg_background.png');
+      background-size: 100% 100%;
+      background-position: center;
+      background-repeat: no-repeat;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center; /* 水平居中 */
+      align-items: center; /* 垂直居中 */
+      position: relative;
+    }
+
+    /* 用于显示表格名称的容器样式 */
+    .table-names-container {
+      width: 600px;
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 20px;
+      border-radius: 5px;
+      max-height: 500px;
+      overflow-y: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      padding: 10px;
+      text-align: left;
+      border: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    td {
+      cursor: pointer;
+    }
+
+    td:hover {
+      background-color: #f1f1f1;
+    }
+
+    /* 新增的标题行样式 */
+    .table-title-row {
+      background-color: #e0e0e0;
+      /* 设置背景颜色，使其与表头区分开 */
+      font-weight: bold;
+      /* 设置字体加粗 */
+      height: 50px;
+      /* 设置标题行高度，以便垂直居中内容 */
+      display: flex;
+      justify-content: center;
+      /* 水平居中对齐 */
+      align-items: center;
+      /* 垂直居中对齐 */
+    }
+
+    /* 使问卷列表在表格头部居中的样式 */
+    .table-title-row td {
+      text-align: center;
+      /* 文本水平居中显示 */
+    }
+
+    /* 右上角的用户信息和按钮样式 */
+    .user-info-container {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      font-size: 14px;
+      background-color: rgba(255, 255, 255, 0.7);
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .user-info-container button {
+      margin-top: 5px;
+      padding: 5px 10px;
+      font-size: 12px;
+      cursor: pointer;
+      border: none;
+      background-color: #f44336;
+      color: white;
+      border-radius: 5px;
+    }
+
+    .user-info-container button:hover {
+      background-color: #d32f2f;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 右上角显示用户信息和按钮 -->
+  <div class="user-info-container">
+    <div id="username">用户名: </div>
+    <button onclick="logout()">退出登录</button>
+    <button onclick="unreg()">注销账户</button>
+  </div>
+
+  <div class="table-names-container" id="table-names-container">
+    <!-- 表格名称列表将动态添加在这里 -->
+  </div>
+
+  <script>
+    // 通用的错误处理函数，统一处理fetch请求过程中的错误
+    function handleFetchError(errorMessage, callback) {
+        console.error(errorMessage);
+        if (callback) {
+            callback();
+        }
+    }
+
+    // 获取用户信息和显示用户名，这里改用sessionStorage
+    function displayUserInfo() {
+        const user = sessionStorage.getItem("username");
+        if (user) {
+            document.getElementById("username").textContent = `用户名: ${user}`;
+        } else {
+            console.log("未登录用户");
+        }
+    }
+
+    // 退出登录，清除当前会话的 sessionStorage 数据
+    function logout() {
+        window.location.href = 'http://192.168.186.138/login';
+        sessionStorage.removeItem("username");
+        sessionStorage.removeItem("token");
+    }
+
+    // 注销账户，操作的也是当前会话存储的用户名和token信息
+    function unreg() {
+        const user = sessionStorage.getItem("username");
+        const token = sessionStorage.getItem("token");
+
+        if (user && token) {
+            const confirmUnreg = confirm("确定要注销账户吗？");
+
+            if (confirmUnreg) {
+                const jsonData = {
+                    "user": user,
+                    "token": token
+                };
+
+                fetch('http://192.168.186.138/api/unreg', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(jsonData)
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        return handleFetchError('注销账户请求失败', () => {
+                            alert('注销账户失败');
+                        });
+                    }
+                    return response.json();
+                })
+                .then(response => {
+                    console.log('注销账户响应：', response);
+                    if (response.code === 0) {
+                        alert('账户已注销');
+                        sessionStorage.removeItem("username");
+                        sessionStorage.removeItem("token");
+                        location.href = 'login.html';
+                    } else {
+                        alert('注销账户失败');
+                    }
+                })
+                .catch(error => {
+                    handleFetchError('请求失败，服务器无响应');
+                });
+            }
+        }
+    }
+
+    // 比较时间，判断当前时间是否超过给定的截止时间
+    function isTimeExpired(deadline) {
+        const currentTime = new Date();
+        const targetTime = new Date(deadline);
+        return currentTime > targetTime;
+    }
+
+    // 检查并删除过期的行
+    function checkAndRemoveExpiredRows() {
+        const tableNamesContainer = document.getElementById('table-names-container');
+        const table = tableNamesContainer.querySelector('table');
+        if (table) {
+            const rows = table.querySelectorAll('tr');
+            for (let i = 1; i < rows.length; i++) {  // 从第二行开始（跳过标题行）
+                const deadlineCell = rows[i].querySelector('.deadline-cell');
+                if (deadlineCell) {
+                    const deadline = deadlineCell.textContent;
+                    if (isTimeExpired(deadline)) {
+                        rows[i].remove();
+                    }
+                }
+            }
+        }
+    }
+
+    // 提取一个函数用于创建表格行元素，提高mytables函数的可读性
+    function createTableRow(tableObj, index) {
+        const row = document.createElement('tr');
+        const td1 = document.createElement('td');
+        td1.textContent = index + 1;
+
+        const td2 = document.createElement('td');
+        td2.textContent = tableObj.table_name;
+        td2.onclick = function () {
+            const user = sessionStorage.getItem("username");
+            const token = sessionStorage.getItem("token");
+            const isFilled = tableObj.is_filled === 1;
+            if (isFilled) {
+                // 如果已填写，弹出提示框询问是否重新填写
+                const confirmResult = confirm('该表格已经填写，是否重新填写？');
+                if (confirmResult) {
+                    // 如果点击是，先删除原来的记录
+                    const deleteData = {
+                        user_name: user,
+                        token: token,
+                        table_name: td2.textContent
+                    };
+                    console.log("删除数据：", deleteData);  // 可用于调试
+
+                    fetch('http://192.168.186.138/api/delete', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(deleteData)
+                    })
+                  .then(response => {
+                        if (!response.ok) {
+                            return handleFetchError('删除记录请求失败', () => {
+                                console.error('删除失败，服务器返回错误：', response);
+                                alert('删除失败，请稍后再试！');
+                            });
+                        }
+                        // 如果删除成功，保存当前table_name到sessionStorage并跳转
+                        sessionStorage.setItem('title', td2.textContent);
+                        location.href = 'http://192.168.186.138/table';
+                    })
+                  .catch(error => {
+                        handleFetchError('删除记录请求失败，服务器无响应', () => {
+                            console.error('删除失败：', error);
+                            alert('删除失败，请稍后再试！');
+                        });
+                    });
+                }
+            } else {
+                // 如果未填写，直接保存当前table_name到sessionStorage并跳转
+                sessionStorage.setItem('title', td2.textContent);
+                location.href = 'http://192.168.186.138/table';
+            }
+        };
+
+        const td3 = document.createElement('td');
+        td3.textContent = tableObj.deadline;
+        td3.classList.add('deadline-cell'); // 添加类名以应用样式
+
+        const td4 = document.createElement('td');
+        td4.textContent = tableObj.is_filled === 1? '已填' : '未填';
+        td4.classList.add('is-filled-cell'); // 添加类名以应用样式
+
+        row.appendChild(td1);
+        row.appendChild(td2);
+        row.appendChild(td3);
+        row.appendChild(td4);
+
+        return row;
+    }
+
+    // mytables函数，对内部逻辑进行了适当拆分，提高可读性
+    function mytables() {
+        const user = sessionStorage.getItem("username");
+        const token = sessionStorage.getItem("token");
+        const jsonData = {
+            "user": user,
+            "token": token
+        };
+
+        fetch('http://192.168.186.138/api/mytables?cmd=count', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(jsonData)
+        })
+      .then(response => {
+            if (!response.ok) {
+                return handleFetchError('获取问卷列表请求失败', () => {
+                    alert('未能加载表格数');
+                });
+            }
+            return response.json();
+        })
+      .then(response => {
+            console.log('返回数据：', response);
+
+            if (response.code === 0) {
+                const tableNamesContainer = document.getElementById('table-names-container');
+                tableNamesContainer.innerHTML = ''; // 清空之前的内容
+
+                const table = document.createElement('table');
+
+                const titleRow = document.createElement('tr');
+                titleRow.classList.add('table-title-row');
+                const titleCell = document.createElement('td');
+                titleCell.colSpan = 4; // 因为增加了一列，所以这里改为4
+                titleCell.textContent = '问卷列表';
+                titleRow.appendChild(titleCell);
+                table.appendChild(titleRow);
+
+                const header = document.createElement('tr');
+                const th1 = document.createElement('th');
+                th1.textContent = 'ID';
+                const th2 = document.createElement('th');
+                th2.textContent = '调查问卷';
+                const th3 = document.createElement('th');
+                th3.textContent = '截止日期';
+                th3.classList.add('deadline-header'); // 添加类名以应用样式
+                const th4 = document.createElement('th');
+                th4.textContent = '是否填写';
+                th4.classList.add('is-filled-header'); // 添加类名以应用样式
+                header.appendChild(th1);
+                header.appendChild(th2);
+                header.appendChild(th3);
+                header.appendChild(th4);
+                table.appendChild(header);
+
+                if (response.tables && Array.isArray(response.tables)) {
+                    response.tables.forEach((tableObj, index) => {
+                        table.appendChild(createTableRow(tableObj, index));
+                    });
+                } else {
+                    console.error('返回的数据格式错误: tables应该是一个数组');
+                }
+
+                tableNamesContainer.appendChild(table);
+                // 页面加载完成后，每隔一段时间（比如1分钟，这里单位是毫秒，即60000毫秒）检查一次是否有过期行
+                setInterval(checkAndRemoveExpiredRows, 60000);
+            } else {
+                alert('未能加载表格数');
+            }
+        })
+      .catch(error => {
+            handleFetchError('请求失败，服务器无响应');
+        });
+    }
+
+    // 新增函数，用于获取并显示左上角的图片（POST 请求）
+    function loadImage() {
+        const jsonData = {
+        };
+
+        fetch('http://192.168.186.138/api/mypictures', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'  // 设置请求头，告知后端数据格式为 JSON
+            },
+            body: JSON.stringify(jsonData)  // 请求体数据（如果需要）
+        })
+        .then(response => {
+            if (!response.ok) {
+                console.error('图片加载失败');
+                return;
+            }
+            return response.blob();  // 将返回的图片数据作为 Blob 对象处理
+        })
+        .then(blob => {
+            const img = document.createElement('img');
+            img.src = URL.createObjectURL(blob);  // 将 Blob 转换为图片的 URL
+            img.style.position = 'absolute';
+            img.style.top = '20px';
+            img.style.left = '20px';
+            img.style.width = '100px';  // 设置图片宽度，可以根据需要调整
+            img.style.height = 'auto';  // 根据宽度自动调整高度
+            document.body.appendChild(img);  // 将图片添加到页面中
+        })
+        .catch(error => {
+            console.error('加载图片时出错:', error);
+        });
+    }
+
+    // 页面加载时调用 loadImage 函数
+    window.onload = function () {
+        displayUserInfo();
+        mytables();
+        loadImage();  // 加载图片
+    };
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,4 @@
+/home/jerry/Desktop/questionnare/questionnare-src/test/grpc_test/build/CMakeFiles/sort_client.dir
+/home/jerry/Desktop/questionnare/questionnare-src/test/grpc_test/build/CMakeFiles/sort_server.dir
+/home/jerry/Desktop/questionnare/questionnare-src/test/grpc_test/build/CMakeFiles/edit_cache.dir
+/home/jerry/Desktop/questionnare/questionnare-src/test/grpc_test/build/CMakeFiles/rebuild_cache.dir

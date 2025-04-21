@@ -1,0 +1,7 @@
+git remote add origin git@github.com:jerry123456123456/questionnare.git
+
+git add .
+
+git commit -m ""
+
+git push -u origin master

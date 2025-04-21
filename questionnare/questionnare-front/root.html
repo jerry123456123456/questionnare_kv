@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>调查问卷系统</title>
+  <link rel="icon" href="logo.ico">
+  <style>
+    /* 整体页面布局样式 */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-image: url('reg_background.png');
+      background-size: 100% 100%;
+      background-position: center;
+      background-repeat: no-repeat;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column; /* 修改为列布局，方便后续垂直方向的对齐 */
+      justify-content: center; /* 水平居中 */
+      align-items: center; /* 垂直居中 */
+      position: relative;
+    }
+
+    /* 登录容器样式，进行位置和宽度调整 */
+    #login-container {
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      top: 0px;
+      width: 600px; /* 宽度增加50%，原来是100%，这里可根据实际需求进一步调整具体数值 */
+      position: relative; /* 设置相对定位，方便后续做垂直方向的移动 */
+      max-height: 500px;
+      overflow-y: auto;
+    }
+
+    h2 {
+      margin-top: 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th,
+    td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    /* 右上角区域样式，用于放置用户名和退出登录按钮 */
+    #header-right {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      align-items: center;
+    }
+
+    #username {
+      margin-right: 10px;
+    }
+
+    button {
+      padding: 5px 10px;
+      border: none;
+      border-radius: 3px;
+      background-color: #f44336;
+      color: white;
+      cursor: pointer;
+    }
+
+    /* 新增的按钮样式 */
+    #add-questionnaire-btn {
+      margin-top: 20px; /* 与上方内容间隔一定距离 */
+      padding: 10px 20px; /* 适当调整按钮内边距，让按钮看起来更合适 */
+      font-size: 16px; /* 调整字体大小 */
+    }
+  </style>
+</head>
+
+<body>
+  <div id="header-right">
+    <span id="username">root</span>
+    <button id="logout-btn">退出登录</button>
+  </div>
+  <div id="login-container">
+    <h2>问卷列表</h2>
+    <table id="questionnaire-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>问卷的名字</th>
+          <th>截止日期</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 新增的按钮 -->
+  <button id="add-questionnaire-btn" onclick="window.location.href='http://192.168.186.138/root_create_table';">新增问卷</button>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <script>
+    // 获取退出登录按钮元素
+    const logoutBtn = document.getElementById('logout-btn');
+    logoutBtn.addEventListener('click', function () {
+      // 点击按钮后跳转到登录页面
+      window.location.href = 'http://192.168.186.138/login';
+    });
+
+    // 使用fetch发送POST请求获取问卷列表
+    async function getQuestionnaires() {
+      try {
+        const response = await fetch('http://192.168.186.138/api/root/tables?cmd=count', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error('请求失败，服务器无响应');
+        }
+
+        const data = await response.json();
+        if (data.code === 0) {
+          const questionnaires = data.tables; // 根据实际的JSON结构调整此处获取问卷列表的方式
+          const tableBody = document.getElementById('questionnaire-table').getElementsByTagName('tbody')[0];
+          questionnaires.forEach((questionnaire, index) => {
+            const row = document.createElement('tr');
+            const idCell = document.createElement('td');
+            idCell.textContent = index + 1;
+            const nameCell = document.createElement('td');
+            nameCell.textContent = questionnaire.table_name;
+            nameCell.addEventListener('click', function () {
+              localStorage.setItem('table_name', questionnaire.table_name);
+              window.location.href = `http://192.168.186.138/root_table`;
+            });
+            const deadlineCell = document.createElement('td');
+            deadlineCell.textContent = questionnaire.deadline;
+            row.appendChild(idCell);
+            row.appendChild(nameCell);
+            row.appendChild(deadlineCell);
+            tableBody.appendChild(row);
+          });
+        } else {
+          console.error('获取问卷列表失败：', data.message);
+        }
+      } catch (error) {
+        console.error('获取问卷列表出现错误：', error);
+      }
+    }
+
+    // 新增函数，用于获取并显示左上角的图片（POST 请求）
+    function loadImage() {
+        const jsonData = {
+        };
+
+        fetch('http://192.168.186.138/api/mypictures', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'  // 设置请求头，告知后端数据格式为 JSON
+            },
+            body: JSON.stringify(jsonData)  // 请求体数据（如果需要）
+        })
+        .then(response => {
+            if (!response.ok) {
+                console.error('图片加载失败');
+                return;
+            }
+            return response.blob();  // 将返回的图片数据作为 Blob 对象处理
+        })
+        .then(blob => {
+            const img = document.createElement('img');
+            img.src = URL.createObjectURL(blob);  // 将 Blob 转换为图片的 URL
+            img.style.position = 'absolute';
+            img.style.top = '20px';
+            img.style.left = '20px';
+            img.style.width = '100px';  // 设置图片宽度，可以根据需要调整
+            img.style.height = 'auto';  // 根据宽度自动调整高度
+            document.body.appendChild(img);  // 将图片添加到页面中
+        })
+        .catch(error => {
+            console.error('加载图片时出错:', error);
+        });
+    }
+    loadImage();
+    // 调用函数发起获取问卷列表的请求
+    getQuestionnaires();
+  </script>
+</body>
+
+</html>

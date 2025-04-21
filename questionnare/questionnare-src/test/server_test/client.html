@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>问卷示例</title>
+</head>
+
+<body>
+    <h1>问卷</h1>
+    <form id="questionnaireForm">
+        <label>姓名：</label><br>
+        <input type="text" id="userName" required><br><br>
+
+        <label>表单名称：</label><br>
+        <input type="text" id="tableName" required><br><br>
+
+        <label>你的年龄是多少？</label><br>
+        <input type="radio" name="question1" value="A" required>A. 18岁以下<br>
+        <input type="radio" name="question1" value="B">B. 18 - 24岁<br>
+        <input type="radio" name="question1" value="C">C. 25 - 30岁<br>
+        <input type="radio" name="question1" value="D">D. 30岁以上<br><br>
+
+        <label>你最喜欢的颜色是什么？</label><br>
+        <input type="radio" name="question2" value="A" required>A. 红色<br>
+        <input type="radio" name="question2" value="B">B. 蓝色<br>
+        <input type="radio" name="question2" value="C">C. 蓝色<br>
+        <input type="radio" name="question2" value="D">D. 黄色<br><br>
+
+        <label>你是否喜欢阅读？</label><br>
+        <input type="radio" name="question3" value="A" required>A. 是<br>
+        <input type="radio" name="question3" value="B">B. 否<br><br>
+
+        <button type="button" onclick="submitQuestionnaire()">提交</button>
+    </form>
+
+    <h2>提交的JSON数据</h2>
+    <pre id="jsonOutput"></pre>
+
+    <script>
+        function submitQuestionnaire() {
+            const form = document.getElementById('questionnaireForm');
+            const user_name = document.getElementById('userName').value;
+            const table_name = document.getElementById('tableName').value;
+            // 假设这里的token是你从其他地方获取的，这里先写死一个示例值，实际应用中需根据情况修改
+            const token = "your_token_value";
+            const formData = {
+                user_name: user_name,
+                token: token,
+                table_name: table_name,
+                questions: []
+            };
+
+            // 收集问题1的答案及具体问题内容
+            const question1Answer = document.querySelector('input[name="question1"]:checked');
+            if (question1Answer) {
+                formData.questions.push({
+                    question_text: '你的年龄是多少？',
+                    answer: question1Answer.value
+                });
+            }
+
+            // 收集问题2的答案及具体问题内容
+            const question2Answer = document.querySelector('input[name="question2"]:checked');
+            if (question2Answer) {
+                formData.questions.push({
+                    question_text: '你最喜欢的颜色是什么？',
+                    answer: question2Answer.value
+                });
+            }
+
+            // 收集问题3的答案及具体问题内容
+            const question3Answer = document.querySelector('input[name="question3"]:checked');
+            if (question3Answer) {
+                formData.questions.push({
+                    question_text: '你是否喜欢阅读？',
+                    answer: question3Answer.value
+                });
+            }
+
+            const jsonData = JSON.stringify(formData, null, 2);
+            document.getElementById('jsonOutput').textContent = jsonData;
+
+            // 发送POST请求
+            fetch('http://192.168.186.138/api2/upload', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: jsonData
+            })
+          .then(response => response.json())
+          .then(data => {
+                    if (data.code === 0) {
+                        console.log('问卷提交成功');
+                    } else {
+                        console.log('问卷提交失败');
+                    }
+                })
+          .catch(error => {
+                    console.error('提交问卷时出错：', error);
+                });
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,3 @@
+/home/jerry/Desktop/questionnare/questionnare-src/test/redis_test/build/CMakeFiles/redis_test.dir
+/home/jerry/Desktop/questionnare/questionnare-src/test/redis_test/build/CMakeFiles/edit_cache.dir
+/home/jerry/Desktop/questionnare/questionnare-src/test/redis_test/build/CMakeFiles/rebuild_cache.dir

@@ -1,0 +1,22 @@
+//protoc --cpp_out=. --grpc_out=. --plugin=protoc-gen-grpc=/usr/local/bin/grpc_cpp_plugin sort.proto
+
+//python3 -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. sort.proto
+
+
+syntax = "proto3";
+
+package mynamespace;  // 自定义命名空间
+
+service SortService {
+    rpc SortNumbers (SortRequest) returns (SortResponse);
+}
+
+message SortRequest {
+    repeated int32 numbers = 1;
+}
+
+message SortResponse {
+    repeated int32 sorted_numbers = 1;
+}
+
+
