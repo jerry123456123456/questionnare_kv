@@ -1,5 +1,6 @@
 #include "tc_common.h"
-
+#include <random>
+#include <chrono> 
 #include <cstdio>
 #include <ctype.h>
 #include <memory>
@@ -154,16 +155,26 @@ int VerifyToken(std::string &user_name, std::string &token) {
 //优化了源码中的伪随机数问题
 std::string RandomString(const int len) {
     std::string str;
-    char c;
-    int idx;
-    
-    srand(time(0)); // 设置种子值为当前时间
+    //使用当前时间作为种子，保证每次运行时种子不同
+    //std::chrono::system_clock::now() 获取当前时间点
+    // .time_since_epoch() 从开始纪元当当前时间点的间隔
+    // .count()计算这个时间间隔的时钟周期
+    unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+    //创建一个随机数引擎
+    //std::mt19937 是 C++ 标准库 <random> 中定义的一个随机数生成器类，它是基于梅森旋转算法（Mersenne Twister algorithm）实现的
+    std::mt19937 generator(seed);
+    //创建一个随机分布
+    // /使用 std::uniform_int_distribution 生成均匀分布的随机整数，范围是 0 到 25
+    std::uniform_int_distribution<> distribution(0,25);
 
-    for (idx = 0; idx < len; idx++) {
-        c = 'a' + rand() % 26;
+    for (int idx = 0; idx < len; idx++) {
+        // 生成一个 0 到 25 之间的随机数
+        int randomValue = distribution(generator);
+        // 将随机数转换为对应的字母
+        char c = 'a' + randomValue;
         str.push_back(c);
     }
-    
+
     return str;
 }
 
