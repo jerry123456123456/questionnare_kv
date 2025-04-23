@@ -1,3 +1,0 @@
-/home/jerry/Desktop/questionnare/questionnare-src/build/CMakeFiles/qs_http_server.dir
-/home/jerry/Desktop/questionnare/questionnare-src/build/CMakeFiles/edit_cache.dir
-/home/jerry/Desktop/questionnare/questionnare-src/build/CMakeFiles/rebuild_cache.dir
